@@ -1,0 +1,2 @@
+Cashier 10001 Cash123
+Hamza 10002 HI
