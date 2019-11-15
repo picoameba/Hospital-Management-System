@@ -13,8 +13,8 @@ class Options extends JFrame implements ActionListener {
 	private JTextArea info = new JTextArea();
 	private JButton[] buttons = new JButton[6];
 	private String[] buttonNames = {"Log In", "Log Out", 
-			"Check employees", "Check Products", 
-			"Select Product", "Purchase Menu"};
+			"Check employees", "Check patients", 
+			"Select patient", "Purchase Menu"};
 	//initializes variables needed for the frame
 
 	private Admin activeAccount;
@@ -110,23 +110,23 @@ class Options extends JFrame implements ActionListener {
 			}
 			info.append("Registering new employee.\n");
 		}
-		else if(e.getSource() == buttons[3]) {	//check products (Admin)
+		else if(e.getSource() == buttons[3]) {	//check patients (Admin)
 			try {
 				new CheckPatient();
 			} catch (FileNotFoundException e1) {
-				JOptionPane.showMessageDialog(null, "Product List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "patient List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
 			}
-			info.append("Checking products.\n");
+			info.append("Checking patients.\n");
 		}
-		else if(e.getSource() == buttons[4]) {	//select product (employee)
+		else if(e.getSource() == buttons[4]) {	//select patient (employee)
 			try {
 				new SelectPatient();
 			} catch (FileNotFoundException e1) {
-				JOptionPane.showMessageDialog(null, "Product List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "patient List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
 			}
-			info.append("Selecting product.\n");
+			info.append("Selecting patient.\n");
 		}
 		else if(e.getSource() == buttons[5]) {	//purchase (employee)
 			try {

@@ -9,7 +9,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 
-//class of the frame for the admin that will show all the product with some option like add new product, remove product and update exsists product
+//class of the frame for the admin that will show all the patient with some option like add new patient, remove patient and update exsists patient
 
 class CheckPatient extends JFrame implements ActionListener{
 	
@@ -19,21 +19,21 @@ class CheckPatient extends JFrame implements ActionListener{
 	private JLabel j[] = new JLabel[7];
 	private JTextArea [] a =  new JTextArea[7];
 	private JScrollPane scrollPane; //scrollPane that will include the textAreas
-	private JButton add = new JButton ("Add new Product");
-	private JButton remove =  new JButton ("Remove Product");
-	private JButton update =  new JButton("Update Product");
+	private JButton add = new JButton ("Add new patient");
+	private JButton remove =  new JButton ("Remove patient");
+	private JButton update =  new JButton("Update patient");
 	private JButton close =  new JButton("Close");
 	private JPanel p1 =  new JPanel(new GridLayout(1,7));
 	private JPanel p2 =  new JPanel(new GridLayout(1,7));
 	private JPanel p3 =  new JPanel(new GridLayout(1,4));
-	//Declare product arraylist
-	private ArrayList<Patient> productsList;
+	//Declare patient arraylist
+	private ArrayList<Patient> patientsList;
 
 	//**********************************************************************************************
 	//constructor
 
 	public CheckPatient () throws FileNotFoundException {
-		super ("Check Products"); //title of the Jframe
+		super ("Check patients"); //title of the Jframe
 
 		for (int i = 0; i<labelNames.length; i++) { 
 			j[i] = new JLabel(labelNames[i]);
@@ -50,9 +50,9 @@ class CheckPatient extends JFrame implements ActionListener{
 		horizontal.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		p2.add(horizontal);
 		scrollPane = new JScrollPane(p2);
-		//read a file ("products.txt") and save the it to arraylist products
-		Scanner fin =  new Scanner (new FileReader("products.txt"));
-		productsList = new ArrayList<>();
+		//read a file ("patients.txt") and save the it to arraylist patients
+		Scanner fin =  new Scanner (new FileReader("patients.txt"));
+		patientsList = new ArrayList<>();
 		String description;
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
@@ -67,13 +67,13 @@ class CheckPatient extends JFrame implements ActionListener{
 				description =  cin.nextLine();
 			else
 				description = "";
-			productsList.add(new Patient (name,id,catagory,size,price,picture,quant,description));
+			patientsList.add(new Patient (name,id,catagory,size,price,picture,quant,description));
 			cin.close();
 		}
 		fin.close();
 
-		//sort the products list by id
-		Collections.sort(productsList, new Comparator<Patient>() {
+		//sort the patients list by id
+		Collections.sort(patientsList, new Comparator<Patient>() {
 			public int compare (Patient o1, Patient o2) {
 				int comp = o1.getId() - o2.getId();
 				return comp;
@@ -81,7 +81,7 @@ class CheckPatient extends JFrame implements ActionListener{
 		});
 
 
-		for (Patient p: productsList) { // add all the products elements to the JTextArea to  manage the products by the admin
+		for (Patient p: patientsList) { // add all the patients elements to the JTextArea to  manage the patients by the admin
 			a[0].append(p.getName()+"\n");
 			a[1].append(p.getId()+"\n");
 			a[2].append(p.getCatagory()+"\n");
@@ -124,31 +124,31 @@ class CheckPatient extends JFrame implements ActionListener{
 			dispose();
 		}
 		else if(e.getSource() == remove) {
-			//ask the admin to enter the ID of the product to remove it from the list
-			String s =  JOptionPane.showInputDialog(null, "Enter The Product ID", "Search Product by ID", JOptionPane.QUESTION_MESSAGE);
+			//ask the admin to enter the ID of the patient to remove it from the list
+			String s =  JOptionPane.showInputDialog(null, "Enter The patient ID", "Search patient by ID", JOptionPane.QUESTION_MESSAGE);
 			int i;
 			try {
 				i = Integer.parseInt(s);
-				PrintWriter fout =  new PrintWriter("products.txt");
+				PrintWriter fout =  new PrintWriter("patients.txt");
 				boolean check = false;
-				for (Patient Pro: productsList) 
+				for (Patient Pro: patientsList) 
 					if (Pro.getId() == i)
 						check = true;
 					else
 						fout.println(Pro);
 				fout.close();
 				if(check) {
-					JOptionPane.showMessageDialog(null, "The Product has removed successfully" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "The patient has removed successfully" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
 					dispose();
 					new CheckPatient();
 				}
 				else
-					JOptionPane.showMessageDialog(null, "The Product ID was not found" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "The patient ID was not found" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
 
 			} 
 			catch (FileNotFoundException e1) {
 				e1.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Products File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "patients File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 			} 
 			catch (Exception e1){
 				e1.printStackTrace();
@@ -157,11 +157,11 @@ class CheckPatient extends JFrame implements ActionListener{
 		}
 		else if (e.getSource() == update){ //the update for the Add Button
 			//asking the admin to enter the ID to update its information
-			String s =  JOptionPane.showInputDialog(null, "Enter The Product ID", "Search Product by ID", JOptionPane.QUESTION_MESSAGE);
+			String s =  JOptionPane.showInputDialog(null, "Enter The patient ID", "Search patient by ID", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
 				boolean check = false;
-				for (Patient Pro: productsList) {
+				for (Patient Pro: patientsList) {
 					if (Pro.getId() == i) {
 						dispose();
 						new UpdatePatient(Pro);
@@ -169,7 +169,7 @@ class CheckPatient extends JFrame implements ActionListener{
 					}
 				}
 				if (!check)
-					JOptionPane.showMessageDialog(null, "The Product ID is not correct" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "The patient ID is not correct" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
 
 			}catch (Exception e1){
 				e1.printStackTrace();

@@ -9,7 +9,7 @@ import java.time.format.*;
 import java.util.*;
 
 
-//frame that will show the employee billing details, and provide the options to add or remove product, change the quantity,
+//frame that will show the employee billing details, and provide the options to add or remove patient, change the quantity,
 //and proceed to purchase.
 
 class CheckOut extends JFrame implements ActionListener{
@@ -28,8 +28,8 @@ class CheckOut extends JFrame implements ActionListener{
 	private JTextArea tpriceVat; //field to show the total price with the vat
 	private JTextArea [] a =  new JTextArea[7];
 	private JScrollPane [] sp = new JScrollPane[7]; //JScrollPane to add it to the JTextArea
-	private JButton add = new JButton ("Add new Product");
-	private JButton remove =  new JButton ("Remove Product");
+	private JButton add = new JButton ("Add new patient");
+	private JButton remove =  new JButton ("Remove patient");
 	private JButton update =  new JButton("Change Quantity");
 	private JButton purchase =  new JButton("Purchase");
 	private JButton cancel =  new JButton("Cancel");
@@ -46,7 +46,7 @@ class CheckOut extends JFrame implements ActionListener{
 	public CheckOut() throws FileNotFoundException {
 		super ("Check Out"); 
 		
-		fin =  new Scanner (new FileReader("Temp.txt")); //read from temp.txt file to show the product information
+		fin =  new Scanner (new FileReader("Temp.txt")); //read from temp.txt file to show the patient information
 		employeeName  = POS.getActiveAccount().getName();
 		
 		for (int i = 0; i<labelNames.length; i++) { //add the text areas and labels to the correct place
@@ -123,7 +123,7 @@ class CheckOut extends JFrame implements ActionListener{
 	}
 
 	//**********************************************************************************************
-	//method to add product information to the temp file, to be used when creating the bill
+	//method to add patient information to the temp file, to be used when creating the bill
 
 	public void printToTemp(String name, int id, String size, double price, int quant , int selectedQuant) throws FileNotFoundException {
 		PrintWriter fout = new PrintWriter(new FileOutputStream(new File("Temp.txt."),true));
@@ -132,11 +132,11 @@ class CheckOut extends JFrame implements ActionListener{
 	}
 
 	//**********************************************************************************************
-	//method to update the product file
+	//method to update the patient file
 
 	public void printToFile(int i, int quantity) throws FileNotFoundException{
-		Scanner fin =  new Scanner (new FileReader("products.txt"));
-		ArrayList<Patient> products = new ArrayList<>();
+		Scanner fin =  new Scanner (new FileReader("patients.txt"));
+		ArrayList<Patient> patients = new ArrayList<>();
 		String description;
 		
 		while (fin.hasNextLine()) {//copies the file data to the arrayList
@@ -152,13 +152,13 @@ class CheckOut extends JFrame implements ActionListener{
 				description =  cin.nextLine();
 			else
 				description = "";
-			products.add(new Patient (name,id,catagory,size,price,picture,quant,description));
+			patients.add(new Patient (name,id,catagory,size,price,picture,quant,description));
 			cin.close();
 		}
 		
 		fin.close();
-		PrintWriter fout =  new PrintWriter ("products.txt");
-		for (Patient Pro: products) //prints arrayList data, correcting the quantity where needed
+		PrintWriter fout =  new PrintWriter ("patients.txt");
+		for (Patient Pro: patients) //prints arrayList data, correcting the quantity where needed
 			if (Pro.getId() == i) {
 				Pro.setQuant(Pro.getQuantity()-quantity);
 				fout.println(Pro);
@@ -177,12 +177,12 @@ class CheckOut extends JFrame implements ActionListener{
 				dispose();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Product File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "patient File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 			}
 
 		}
 		else if (e.getSource() == update){ //the actions for the Update Button
-			String s =  JOptionPane.showInputDialog(null, "Enter The Product ID", "Search Product by ID", JOptionPane.QUESTION_MESSAGE);
+			String s =  JOptionPane.showInputDialog(null, "Enter The patient ID", "Search patient by ID", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
 
@@ -249,7 +249,7 @@ class CheckOut extends JFrame implements ActionListener{
 
 		}
 		else if (e.getSource() == remove){ //the actions for the remove Button
-			String s =  JOptionPane.showInputDialog(null, "Enter The Product ID", "Search Product by ID", JOptionPane.QUESTION_MESSAGE);
+			String s =  JOptionPane.showInputDialog(null, "Enter The patient ID", "Search patient by ID", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
 				PrintWriter fout =  new PrintWriter ("Temp.txt");
@@ -305,7 +305,7 @@ class CheckOut extends JFrame implements ActionListener{
 			PrintWriter fout;
 			try {
 				fout = new PrintWriter ("Bill.txt");
-				fout.println("Purchased Products:");
+				fout.println("Purchased patients:");
 				
 				Scanner rname = new Scanner(a[0].getText());
 				Scanner rid = new Scanner(a[1].getText());

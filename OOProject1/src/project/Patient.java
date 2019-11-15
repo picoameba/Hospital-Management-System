@@ -2,14 +2,14 @@ package project;
 
 public class Patient {
 	
-	// declare the products variables
+	// declare the patients variables
 	private String name, category, size, description, picture;
 	private int id, quantity;
 	private double price;
 	// end declaration
 
 	//**********************************************************************************************
-	//initialize the product to default with default constructor
+	//initialize the patient to default with default constructor
 
 	public Patient() {
 		this.name = "";
@@ -23,7 +23,7 @@ public class Patient {
 	}
 
 	//**********************************************************************************************
-	//initialize the products information
+	//initialize the patients information
 	public Patient(String name, int id, String catagory, String size, double price,
 			String picture,  int quant, String discription) {
 		this.name = name;
@@ -90,7 +90,7 @@ public class Patient {
 	// end setter and getter methods
 
 	//**********************************************************************************************
-	//method that makes a copy of one product and assigns it to another
+	//method that makes a copy of one patient and assigns it to another
 
 	public void makeCopy(Patient p) {
 		name =  p.getName();
@@ -106,4 +106,4 @@ public class Patient {
 	public String toString() {
 		return name +" "+id+" "+ category +" "+ size+" "+price+" "+picture+" "+quantity+" "+ description;
 	}
-}//endProduct
+}//endpatient

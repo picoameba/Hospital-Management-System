@@ -6,21 +6,21 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 
-//class used by the admin to update the details of a product 
+//class used by the admin to update the details of a patient 
 
 class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 	
 	//declare the JFrame elements
 	private JButton cancel = new JButton("Cancel");
 	protected JButton update = new JButton("Update");
-	private JLabel name =  new JLabel("Name of The Product:");
-	private JLabel id =  new JLabel("ID of The Product:");
-	private JLabel cat =  new JLabel("Category of The Product:");
-	private JLabel size =  new JLabel("Size of The Product:");
-	private JLabel price =  new JLabel("Price of The Product:");
-	private JLabel pic =  new JLabel("Picture of The Product:");
-	private JLabel quant =  new JLabel("Quantity of The Product:");
-	private JLabel dis =  new JLabel("Description of The Product:");
+	private JLabel name =  new JLabel("Name of The patient:");
+	private JLabel id =  new JLabel("ID of The patient:");
+	private JLabel cat =  new JLabel("Category of The patient:");
+	private JLabel size =  new JLabel("Size of The patient:");
+	private JLabel price =  new JLabel("Price of The patient:");
+	private JLabel pic =  new JLabel("Picture of The patient:");
+	private JLabel quant =  new JLabel("Quantity of The patient:");
+	private JLabel dis =  new JLabel("Description of The patient:");
 	private JTextField tname;
 	protected JTextField tid;
 	private JTextField tcat;
@@ -34,7 +34,7 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 	//constructor
 	
 	public UpdatePatient(Patient p) {
-		super("Update Product"); //the title of the JFrame
+		super("Update patient"); //the title of the JFrame
 		setLayout(new GridLayout(9,2)); //set Layout to GridLayout with 9 rows and two columns
 		tname = new JTextField(p.getName());
 		tid = new JTextField(p.getId()+"");
@@ -66,11 +66,11 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 	}
 
 	//**********************************************************************************************
-	//updates the file to match the new product information
+	//updates the file to match the new patient information
 	
 	public void printToFile(Object p) throws IOException{
-		Scanner fin =  new Scanner (new FileReader("products.txt"));
-		ArrayList<Patient> products = new ArrayList<>();
+		Scanner fin =  new Scanner (new FileReader("patients.txt"));
+		ArrayList<Patient> patients = new ArrayList<>();
 		String description;
 		
 		while (fin.hasNextLine()) {
@@ -86,13 +86,13 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 				description = cin.nextLine();
 			else
 				description = "";
-			products.add(new Patient (name,id,catagory,size,price,picture,quant,description));
+			patients.add(new Patient (name,id,catagory,size,price,picture,quant,description));
 			cin.close();
 		}
 		fin.close();
 		
-		PrintWriter fout =  new PrintWriter ("products.txt");
-		for (Patient Pro: products) 
+		PrintWriter fout =  new PrintWriter ("patients.txt");
+		for (Patient Pro: patients) 
 			if (Pro.getId() ==  ((Patient)p).getId())
 				fout.println(p);
 			else
@@ -110,7 +110,7 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 				new CheckPatient();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Product File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "patient File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 			}
 
 		}
@@ -133,7 +133,7 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 				else {
 					Patient pro = new Patient(name,id,catagory,size,price,picture,quant,desc);
 					printToFile(pro);
-					JOptionPane.showMessageDialog(null, "Product List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "patient List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
 					dispose();
 					new CheckPatient();
 				}

@@ -6,26 +6,26 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 
-//class of the frame that provides the options to select the products,
+//class of the frame that provides the options to select the patients,
 //either by ID or by the category then the name then the size
 
 class SelectPatient extends JFrame implements ActionListener {
 	
-	private JButton id = new JButton("Choose Product By ID");
-	private JButton select = new JButton("Choose Product By Category");
+	private JButton id = new JButton("Choose patient By ID");
+	private JButton select = new JButton("Choose patient By Category");
 	private JButton close = new JButton("Close");
 	private Scanner fin;
-	private ArrayList<Patient> productsList; // declare arraylist for the products
-	private Patient selectedProduct;	// declare a product which we will pass to the Purchase JFrame
+	private ArrayList<Patient> patientsList; // declare arraylist for the patients
+	private Patient selectedpatient;	// declare a patient which we will pass to the Purchase JFrame
 
 	//**********************************************************************************************
 	//constructor 
 
 	public SelectPatient() throws FileNotFoundException {
-		super("Choose Product"); //the title of the JFrame
+		super("Choose patient"); //the title of the JFrame
 
-		fin = new Scanner(new FileReader("products.txt"));
-		productsList = new ArrayList<>();
+		fin = new Scanner(new FileReader("patients.txt"));
+		patientsList = new ArrayList<>();
 		String description;
 
 		while (fin.hasNextLine()) {
@@ -41,7 +41,7 @@ class SelectPatient extends JFrame implements ActionListener {
 				description =  cin.nextLine();
 			else
 				description = "";
-			productsList.add(new Patient (name,id,catagory,size,price,picture,quant,description));
+			patientsList.add(new Patient (name,id,catagory,size,price,picture,quant,description));
 			cin.close();
 		}
 		
@@ -67,10 +67,10 @@ class SelectPatient extends JFrame implements ActionListener {
 	//**********************************************************************************************
 	//method that extracts the list of categories from the file
 
-	public static ArrayList<String> makeCategoryList(ArrayList<Patient> productList) {
+	public static ArrayList<String> makeCategoryList(ArrayList<Patient> patientList) {
 		//declare arraylist of type string
 		ArrayList<String> categoryList = new ArrayList<>();
-		for(Patient p : productList) {
+		for(Patient p : patientList) {
 			if(!categoryList.contains(p.getCatagory())) {
 				categoryList.add(p.getCatagory());
 			}
@@ -81,10 +81,10 @@ class SelectPatient extends JFrame implements ActionListener {
 	//**********************************************************************************************
 	//method that extracts the list of names from a certain category in the file
 
-	public static ArrayList<String> makeNameList(String catSelect, ArrayList<Patient> productList) {
+	public static ArrayList<String> makeNameList(String catSelect, ArrayList<Patient> patientList) {
 		//declare arraylist of type string
 		ArrayList<String> nameList = new ArrayList<>();
-		for(Patient p : productList) {
+		for(Patient p : patientList) {
 			if(!nameList.contains(p.getName()) && p.getCatagory().contains(catSelect)) {
 				nameList.add(p.getName());
 			}
@@ -93,12 +93,12 @@ class SelectPatient extends JFrame implements ActionListener {
 	}
 
 	//**********************************************************************************************
-	//method that extracts the available sizes of a certain product in the file
+	//method that extracts the available sizes of a certain patient in the file
 
-	public static ArrayList<String> makeSizeList(String nameSelect, String catSelect, ArrayList<Patient> productList) {
+	public static ArrayList<String> makeSizeList(String nameSelect, String catSelect, ArrayList<Patient> patientList) {
 		//declare arraylist of type string
 		ArrayList<String> sizeList = new ArrayList<>();
-		for(Patient p : productList) {
+		for(Patient p : patientList) {
 			if(!sizeList.contains(p.getName()) && p.getCatagory().contains(catSelect) && p.getName().contains(nameSelect)) {
 				sizeList.add(p.getSize());
 			}
@@ -106,7 +106,7 @@ class SelectPatient extends JFrame implements ActionListener {
 		return sizeList;
 	}
 	//**********************************************************************************************
-	//method that checks if a product id exists
+	//method that checks if a patient id exists
 
 	public boolean checkExists (int i) throws FileNotFoundException {
 		Scanner fin =  new Scanner (new FileReader("Temp.txt"));
@@ -127,19 +127,19 @@ class SelectPatient extends JFrame implements ActionListener {
 	//actionLister
 
 	public void actionPerformed (ActionEvent e) {
-		if (e.getSource() ==  id) { // the actions for the ID button which search the product by ID
-			String s =  JOptionPane.showInputDialog(null, "Enter The Product ID", "Search Product by ID", JOptionPane.QUESTION_MESSAGE);
+		if (e.getSource() ==  id) { // the actions for the ID button which search the patient by ID
+			String s =  JOptionPane.showInputDialog(null, "Enter The patient ID", "Search patient by ID", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
-				selectedProduct =  new Patient();
+				selectedpatient =  new Patient();
 				boolean check = false;
 				if (!checkExists(i)) {
-					for (Patient p: productsList) {
+					for (Patient p: patientsList) {
 						if (p.getId() == i) {
-							selectedProduct.makeCopy(p);
+							selectedpatient.makeCopy(p);
 							check = true;
 							dispose();
-							new BookAppointment(selectedProduct);
+							new BookAppointment(selectedpatient);
 						}							
 					}
 					if (!check)
@@ -158,28 +158,28 @@ class SelectPatient extends JFrame implements ActionListener {
 			try {
 				new CheckOut();
 			} catch (FileNotFoundException e1) {
-				JOptionPane.showMessageDialog(null, "Products File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "patients File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
 			}
 		}
-		else { //actions for the category Button which will search the product by category then name then size
+		else { //actions for the category Button which will search the patient by category then name then size
 
-			String [] catList =  makeCategoryList(productsList).toArray(new String[makeCategoryList(productsList).size()]);
-			String catSelect = (String)JOptionPane.showInputDialog(null, "Select the product catagory","Search Catagory"
+			String [] catList =  makeCategoryList(patientsList).toArray(new String[makeCategoryList(patientsList).size()]);
+			String catSelect = (String)JOptionPane.showInputDialog(null, "Select the patient catagory","Search Catagory"
 					,JOptionPane.QUESTION_MESSAGE,null,catList,catList[0]);	
-			String [] nameList =  makeNameList(catSelect,productsList).toArray(new String[makeNameList(catSelect,productsList).size()]);
-			String nameSelect = (String)JOptionPane.showInputDialog(null, "Select the product name","Search Name"
+			String [] nameList =  makeNameList(catSelect,patientsList).toArray(new String[makeNameList(catSelect,patientsList).size()]);
+			String nameSelect = (String)JOptionPane.showInputDialog(null, "Select the patient name","Search Name"
 					,JOptionPane.QUESTION_MESSAGE,null,nameList,nameList[0]);
-			String [] sizeList =  makeSizeList(nameSelect,catSelect,productsList).toArray(new String[makeSizeList(nameSelect,catSelect,productsList).size()]);
-			String sizeSelect = (String)JOptionPane.showInputDialog(null, "Select the product size","Search Size"
+			String [] sizeList =  makeSizeList(nameSelect,catSelect,patientsList).toArray(new String[makeSizeList(nameSelect,catSelect,patientsList).size()]);
+			String sizeSelect = (String)JOptionPane.showInputDialog(null, "Select the patient size","Search Size"
 					,JOptionPane.QUESTION_MESSAGE,null,sizeList,sizeList[0]);
-			selectedProduct =  new Patient();
-			for (Patient p: productsList) {
+			selectedpatient =  new Patient();
+			for (Patient p: patientsList) {
 				if (p.getCatagory().contains(catSelect) && p.getName().contains(nameSelect)&& p.getSize().contains(sizeSelect)) 
-					selectedProduct.makeCopy(p);
+					selectedpatient.makeCopy(p);
 			}
 			dispose();
-			new BookAppointment(selectedProduct);
+			new BookAppointment(selectedpatient);
 
 		}
 	}

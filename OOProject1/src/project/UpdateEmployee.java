@@ -99,7 +99,7 @@ public class UpdateEmployee extends JFrame implements ActionListener, PrintToFil
 				new RegisterEmployee();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Product File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "patient File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 			}
 
 		}

@@ -23,7 +23,7 @@ class AddEmployee extends UpdateEmployee {
 	}
 
 	//**********************************************************************************************
-	//method that adds a product to the file
+	//method that adds a patient to the file
 
 	public void printToFile(Object c) throws IOException{
 		PrintWriter fout =  new PrintWriter (new FileWriter("employee.txt", true));//appends to the file
