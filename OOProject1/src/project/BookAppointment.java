@@ -1,4 +1,4 @@
-package kuGrocery;
+package project;
 //class of the frame that will show the product's picture and details and asks the cashier for the quantity
 
 import javax.imageio.*;
@@ -9,7 +9,7 @@ import java.awt.image.*;
 import java.io.*;
 import java.util.*;
 
-class Purchase extends JFrame implements ActionListener, PrintToFile {
+class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 
 	//declare the JFrame elements
 	private JLabel confirmLabel =  new JLabel("Confirm the product");
@@ -21,12 +21,12 @@ class Purchase extends JFrame implements ActionListener, PrintToFile {
 	private JButton confirm = new JButton ("Confirm");
 	private JPanel p1 = new JPanel (new GridLayout(2,2));
 	private JPanel p2 = new JPanel (new GridLayout(1,2));
-	private Product selectedProduct = new Product();
+	private Patient selectedProduct = new Patient();
 
 	//**********************************************************************************************
 	//constructor
 
-	public Purchase(Product P) { // a frame which takes products as a parameter
+	public BookAppointment(Patient P) { // a frame which takes products as a parameter
 		super("Product details"); //the title of the frame and the layout is the default Border Layout
 		selectedProduct.makeCopy(P); //Make a copy of the parameter product to use it in the actionPerformed method
 		details.setEditable(false); //disable the edit text for the product details
@@ -74,7 +74,7 @@ class Purchase extends JFrame implements ActionListener, PrintToFile {
 	//method that check if quantity is positive or negative and 
 	//checks if the quantity that the cashier asks for is more than the product quantity or not
 
-	public boolean checkQuant(int quantity, Product p) {
+	public boolean checkQuant(int quantity, Patient p) {
 		if (quantity >= 0)
 			return p.getQuantity()-quantity<0?false:true;
 		else
@@ -115,7 +115,7 @@ class Purchase extends JFrame implements ActionListener, PrintToFile {
 
 	public void printToFile(Object p) throws FileNotFoundException{
 		Scanner fin =  new Scanner (new FileReader("products.txt"));
-		ArrayList<Product> products = new ArrayList<>();
+		ArrayList<Patient> products = new ArrayList<>();
 		String description;
 
 		//Add all products from file to arrayList
@@ -132,15 +132,15 @@ class Purchase extends JFrame implements ActionListener, PrintToFile {
 				description =  cin.nextLine();
 			else
 				description = "";
-			products.add(new Product (name,id,catagory,size,price,picture,quant,description));
+			products.add(new Patient (name,id,catagory,size,price,picture,quant,description));
 			cin.close();
 		}
 		fin.close();
 
 		//Print out the updated file
 		PrintWriter fout =  new PrintWriter ("products.txt");
-		for (Product Pro: products) 
-			if (Pro.getId() == ((Product)p).getId())
+		for (Patient Pro: products) 
+			if (Pro.getId() == ((Patient)p).getId())
 				fout.println(p);
 			else
 				fout.println(Pro);
@@ -154,7 +154,7 @@ class Purchase extends JFrame implements ActionListener, PrintToFile {
 		if (e.getSource() ==  cancel) { //the actions for cancel JButton
 			dispose();
 			try {
-				new SelectProduct();
+				new SelectPatient();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Products File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);

@@ -1,15 +1,15 @@
-package kuGrocery;
+package project;
 
 import javax.swing.*;
 
-import project.AddCashier;
+import project.AddEmployee;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 
-class RegisterCashier extends JFrame implements ActionListener{
+class RegisterEmployee extends JFrame implements ActionListener{
 
 	private JLabel cashName = new JLabel ("Cashier Name");
 	private JLabel cashID = new JLabel ("Cashier ID");
@@ -23,12 +23,12 @@ class RegisterCashier extends JFrame implements ActionListener{
 	private JPanel p1 = new JPanel(new GridLayout(1,3));
 	private JPanel p2 = new JPanel(new GridLayout(1,3));
 	private JPanel p3 = new JPanel(new GridLayout(1,4));
-	private ArrayList<Cashier> cashiersList;
+	private ArrayList<Employee> cashiersList;
 
 	//**********************************************************************************************
 	//constructor
 
-	public RegisterCashier() throws FileNotFoundException {
+	public RegisterEmployee() throws FileNotFoundException {
 		textAreas[0] = new JTextArea();
 		textAreas[1] = new JTextArea();
 		textAreas[2] = new JTextArea();
@@ -47,7 +47,7 @@ class RegisterCashier extends JFrame implements ActionListener{
 			textAreas[0].append(name+"\n");
 			textAreas[1].append(id+"\n");
 			textAreas[2].append(pass+"\n");
-			cashiersList.add(new Cashier (name,id,pass));
+			cashiersList.add(new Employee (name,id,pass));
 			cin.close();
 		}
 		fin.close();
@@ -112,7 +112,7 @@ class RegisterCashier extends JFrame implements ActionListener{
 				if (check) {
 					JOptionPane.showMessageDialog(null, "The cashier was removed seccussfully" , "Successful" , JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					new RegisterCashier();
+					new RegisterEmployee();
 				}
 				else
 					JOptionPane.showMessageDialog(null, "ID not found" , "Invaild ID" , JOptionPane.ERROR_MESSAGE);
@@ -123,7 +123,7 @@ class RegisterCashier extends JFrame implements ActionListener{
 			}
 		}
 		else if(e.getSource() == addCash) {//add a cashier
-			new AddCashier(cashiersList);
+			new AddEmployee(cashiersList);
 			dispose();
 		}
 		else if (e.getSource() == updateCash){ //update a cashier
@@ -131,10 +131,10 @@ class RegisterCashier extends JFrame implements ActionListener{
 			try {
 				int i = Integer.parseInt(s);
 				boolean check = false;
-				for (Cashier cash: cashiersList) {
+				for (Employee cash: cashiersList) {
 					if (cash.getId() == i) {
 						dispose();
-						new UpdateCashier(cash);
+						new UpdateEmployee(cash);
 						check = true;
 					}
 				}

@@ -1,4 +1,4 @@
-package kuGrocery;
+package project;
 
 import java.io.*;
 import java.util.*;
@@ -43,7 +43,7 @@ public class POS {
 						//creates active account from text file data
 					}
 					else {
-						activeAccount = new Cashier(user, id, pass);
+						activeAccount = new Employee(user, id, pass);
 						//creates active account from text file data
 					}
 					new Options(true);

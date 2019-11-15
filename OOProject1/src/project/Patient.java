@@ -1,6 +1,6 @@
-package kuGrocery;
+package project;
 
-public class Product {
+public class Patient {
 	
 	// declare the products variables
 	private String name, category, size, description, picture;
@@ -11,7 +11,7 @@ public class Product {
 	//**********************************************************************************************
 	//initialize the product to default with default constructor
 
-	public Product() {
+	public Patient() {
 		this.name = "";
 		this.id = 0;
 		this.category = "";
@@ -24,7 +24,7 @@ public class Product {
 
 	//**********************************************************************************************
 	//initialize the products information
-	public Product(String name, int id, String catagory, String size, double price,
+	public Patient(String name, int id, String catagory, String size, double price,
 			String picture,  int quant, String discription) {
 		this.name = name;
 		this.id = id;
@@ -92,7 +92,7 @@ public class Product {
 	//**********************************************************************************************
 	//method that makes a copy of one product and assigns it to another
 
-	public void makeCopy(Product p) {
+	public void makeCopy(Patient p) {
 		name =  p.getName();
 		id =  p.getId();
 		category = p.getCatagory();

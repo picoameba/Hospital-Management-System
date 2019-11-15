@@ -1,4 +1,4 @@
-package kuGrocery;
+package project;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,19 +9,19 @@ import java.util.*;
 //class of the frame that provides the options to select the products,
 //either by ID or by the category then the name then the size
 
-class SelectProduct extends JFrame implements ActionListener {
+class SelectPatient extends JFrame implements ActionListener {
 	
 	private JButton id = new JButton("Choose Product By ID");
 	private JButton select = new JButton("Choose Product By Category");
 	private JButton close = new JButton("Close");
 	private Scanner fin;
-	private ArrayList<Product> productsList; // declare arraylist for the products
-	private Product selectedProduct;	// declare a product which we will pass to the Purchase JFrame
+	private ArrayList<Patient> productsList; // declare arraylist for the products
+	private Patient selectedProduct;	// declare a product which we will pass to the Purchase JFrame
 
 	//**********************************************************************************************
 	//constructor 
 
-	public SelectProduct() throws FileNotFoundException {
+	public SelectPatient() throws FileNotFoundException {
 		super("Choose Product"); //the title of the JFrame
 
 		fin = new Scanner(new FileReader("products.txt"));
@@ -41,7 +41,7 @@ class SelectProduct extends JFrame implements ActionListener {
 				description =  cin.nextLine();
 			else
 				description = "";
-			productsList.add(new Product (name,id,catagory,size,price,picture,quant,description));
+			productsList.add(new Patient (name,id,catagory,size,price,picture,quant,description));
 			cin.close();
 		}
 		
@@ -67,10 +67,10 @@ class SelectProduct extends JFrame implements ActionListener {
 	//**********************************************************************************************
 	//method that extracts the list of categories from the file
 
-	public static ArrayList<String> makeCategoryList(ArrayList<Product> productList) {
+	public static ArrayList<String> makeCategoryList(ArrayList<Patient> productList) {
 		//declare arraylist of type string
 		ArrayList<String> categoryList = new ArrayList<>();
-		for(Product p : productList) {
+		for(Patient p : productList) {
 			if(!categoryList.contains(p.getCatagory())) {
 				categoryList.add(p.getCatagory());
 			}
@@ -81,10 +81,10 @@ class SelectProduct extends JFrame implements ActionListener {
 	//**********************************************************************************************
 	//method that extracts the list of names from a certain category in the file
 
-	public static ArrayList<String> makeNameList(String catSelect, ArrayList<Product> productList) {
+	public static ArrayList<String> makeNameList(String catSelect, ArrayList<Patient> productList) {
 		//declare arraylist of type string
 		ArrayList<String> nameList = new ArrayList<>();
-		for(Product p : productList) {
+		for(Patient p : productList) {
 			if(!nameList.contains(p.getName()) && p.getCatagory().contains(catSelect)) {
 				nameList.add(p.getName());
 			}
@@ -95,10 +95,10 @@ class SelectProduct extends JFrame implements ActionListener {
 	//**********************************************************************************************
 	//method that extracts the available sizes of a certain product in the file
 
-	public static ArrayList<String> makeSizeList(String nameSelect, String catSelect, ArrayList<Product> productList) {
+	public static ArrayList<String> makeSizeList(String nameSelect, String catSelect, ArrayList<Patient> productList) {
 		//declare arraylist of type string
 		ArrayList<String> sizeList = new ArrayList<>();
-		for(Product p : productList) {
+		for(Patient p : productList) {
 			if(!sizeList.contains(p.getName()) && p.getCatagory().contains(catSelect) && p.getName().contains(nameSelect)) {
 				sizeList.add(p.getSize());
 			}
@@ -131,15 +131,15 @@ class SelectProduct extends JFrame implements ActionListener {
 			String s =  JOptionPane.showInputDialog(null, "Enter The Product ID", "Search Product by ID", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
-				selectedProduct =  new Product();
+				selectedProduct =  new Patient();
 				boolean check = false;
 				if (!checkExists(i)) {
-					for (Product p: productsList) {
+					for (Patient p: productsList) {
 						if (p.getId() == i) {
 							selectedProduct.makeCopy(p);
 							check = true;
 							dispose();
-							new Purchase(selectedProduct);
+							new BookAppointment(selectedProduct);
 						}							
 					}
 					if (!check)
@@ -173,13 +173,13 @@ class SelectProduct extends JFrame implements ActionListener {
 			String [] sizeList =  makeSizeList(nameSelect,catSelect,productsList).toArray(new String[makeSizeList(nameSelect,catSelect,productsList).size()]);
 			String sizeSelect = (String)JOptionPane.showInputDialog(null, "Select the product size","Search Size"
 					,JOptionPane.QUESTION_MESSAGE,null,sizeList,sizeList[0]);
-			selectedProduct =  new Product();
-			for (Product p: productsList) {
+			selectedProduct =  new Patient();
+			for (Patient p: productsList) {
 				if (p.getCatagory().contains(catSelect) && p.getName().contains(nameSelect)&& p.getSize().contains(sizeSelect)) 
 					selectedProduct.makeCopy(p);
 			}
 			dispose();
-			new Purchase(selectedProduct);
+			new BookAppointment(selectedProduct);
 
 		}
 	}

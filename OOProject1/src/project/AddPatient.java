@@ -1,22 +1,22 @@
 //class used by the admin to update the details of a product 
 
-package kuGrocery;
+package project;
 
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
-import kuGrocery.Product;
-import kuGrocery.UpdateProduct;
+import project.Patient;
+import project.UpdatePatient;
 
 import java.awt.event.*;
 
 
-class AddProduct extends UpdateProduct implements ActionListener{
+class AddPatient extends UpdatePatient implements ActionListener{
 	
 	//constructor
-	public AddProduct() {
-		super(new Product());
+	public AddPatient() {
+		super(new Patient());
 		setTitle("Add Product");
 		update.setText("Add");
 		tid.setEditable(true);

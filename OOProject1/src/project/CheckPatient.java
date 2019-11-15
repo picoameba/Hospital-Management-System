@@ -1,8 +1,8 @@
-package kuGrocery;
+package project;
 
 import javax.swing.*;
 
-import project.AddProduct;
+import project.AddPatient;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -11,7 +11,7 @@ import java.util.*;
 
 //class of the frame for the admin that will show all the product with some option like add new product, remove product and update exsists product
 
-class CheckProduct extends JFrame implements ActionListener{
+class CheckPatient extends JFrame implements ActionListener{
 	
 	//declare an array to use it in the JLabel
 	private String [] labelNames =  {"Name","ID", "Catagory", "Size" , "Price", "Quantity" , "Description"};
@@ -27,12 +27,12 @@ class CheckProduct extends JFrame implements ActionListener{
 	private JPanel p2 =  new JPanel(new GridLayout(1,7));
 	private JPanel p3 =  new JPanel(new GridLayout(1,4));
 	//Declare product arraylist
-	private ArrayList<Product> productsList;
+	private ArrayList<Patient> productsList;
 
 	//**********************************************************************************************
 	//constructor
 
-	public CheckProduct () throws FileNotFoundException {
+	public CheckPatient () throws FileNotFoundException {
 		super ("Check Products"); //title of the Jframe
 
 		for (int i = 0; i<labelNames.length; i++) { 
@@ -67,21 +67,21 @@ class CheckProduct extends JFrame implements ActionListener{
 				description =  cin.nextLine();
 			else
 				description = "";
-			productsList.add(new Product (name,id,catagory,size,price,picture,quant,description));
+			productsList.add(new Patient (name,id,catagory,size,price,picture,quant,description));
 			cin.close();
 		}
 		fin.close();
 
 		//sort the products list by id
-		Collections.sort(productsList, new Comparator<Product>() {
-			public int compare (Product o1, Product o2) {
+		Collections.sort(productsList, new Comparator<Patient>() {
+			public int compare (Patient o1, Patient o2) {
 				int comp = o1.getId() - o2.getId();
 				return comp;
 			}
 		});
 
 
-		for (Product p: productsList) { // add all the products elements to the JTextArea to  manage the products by the admin
+		for (Patient p: productsList) { // add all the products elements to the JTextArea to  manage the products by the admin
 			a[0].append(p.getName()+"\n");
 			a[1].append(p.getId()+"\n");
 			a[2].append(p.getCatagory()+"\n");
@@ -120,7 +120,7 @@ class CheckProduct extends JFrame implements ActionListener{
 
 	public void actionPerformed (ActionEvent e) {
 		if (e.getSource() == add) { //the actions for the Add Button
-			new AddProduct();
+			new AddPatient();
 			dispose();
 		}
 		else if(e.getSource() == remove) {
@@ -131,7 +131,7 @@ class CheckProduct extends JFrame implements ActionListener{
 				i = Integer.parseInt(s);
 				PrintWriter fout =  new PrintWriter("products.txt");
 				boolean check = false;
-				for (Product Pro: productsList) 
+				for (Patient Pro: productsList) 
 					if (Pro.getId() == i)
 						check = true;
 					else
@@ -140,7 +140,7 @@ class CheckProduct extends JFrame implements ActionListener{
 				if(check) {
 					JOptionPane.showMessageDialog(null, "The Product has removed successfully" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					new CheckProduct();
+					new CheckPatient();
 				}
 				else
 					JOptionPane.showMessageDialog(null, "The Product ID was not found" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
@@ -161,10 +161,10 @@ class CheckProduct extends JFrame implements ActionListener{
 			try {
 				int i = Integer.parseInt(s);
 				boolean check = false;
-				for (Product Pro: productsList) {
+				for (Patient Pro: productsList) {
 					if (Pro.getId() == i) {
 						dispose();
-						new UpdateProduct(Pro);
+						new UpdatePatient(Pro);
 						check = true;
 					}
 				}

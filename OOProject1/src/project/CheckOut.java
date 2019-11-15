@@ -1,4 +1,4 @@
-package kuGrocery;
+package project;
 
 import javax.swing.*;
 import java.awt.*;
@@ -136,7 +136,7 @@ class CheckOut extends JFrame implements ActionListener{
 
 	public void printToFile(int i, int quantity) throws FileNotFoundException{
 		Scanner fin =  new Scanner (new FileReader("products.txt"));
-		ArrayList<Product> products = new ArrayList<>();
+		ArrayList<Patient> products = new ArrayList<>();
 		String description;
 		
 		while (fin.hasNextLine()) {//copies the file data to the arrayList
@@ -152,13 +152,13 @@ class CheckOut extends JFrame implements ActionListener{
 				description =  cin.nextLine();
 			else
 				description = "";
-			products.add(new Product (name,id,catagory,size,price,picture,quant,description));
+			products.add(new Patient (name,id,catagory,size,price,picture,quant,description));
 			cin.close();
 		}
 		
 		fin.close();
 		PrintWriter fout =  new PrintWriter ("products.txt");
-		for (Product Pro: products) //prints arrayList data, correcting the quantity where needed
+		for (Patient Pro: products) //prints arrayList data, correcting the quantity where needed
 			if (Pro.getId() == i) {
 				Pro.setQuant(Pro.getQuantity()-quantity);
 				fout.println(Pro);
@@ -173,7 +173,7 @@ class CheckOut extends JFrame implements ActionListener{
 	public void actionPerformed (ActionEvent e) {
 		if (e.getSource() == add) { //the actions for the Add Button
 			try {
-				new SelectProduct();
+				new SelectPatient();
 				dispose();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();

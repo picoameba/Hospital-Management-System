@@ -1,15 +1,15 @@
-package kuGrocery;
+package project;
 
-public class Cashier extends Admin {
+public class Employee extends Admin {
 	
 	//constructor
-	public Cashier() {
+	public Employee() {
 		super("", 0, "");
 	}
 	
 	//**********************************************************************************************
 	//full constructor
-	public Cashier(String user, int id, String pass) {
+	public Employee(String user, int id, String pass) {
 		super(user, id, pass);
 	}
 

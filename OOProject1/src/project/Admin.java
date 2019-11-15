@@ -1,4 +1,4 @@
-package kuGrocery;
+package project;
 
 public class Admin {
 

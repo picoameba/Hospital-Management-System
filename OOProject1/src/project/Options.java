@@ -1,4 +1,4 @@
-package kuGrocery;
+package project;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -53,7 +53,7 @@ class Options extends JFrame implements ActionListener {
 			info.setText("Welcome " + activeAccount.getName() + "!\n");
 			buttons[0].setEnabled(false);
 			buttons[0].setBackground(Color.LIGHT_GRAY);
-			if(activeAccount instanceof Cashier) {
+			if(activeAccount instanceof Employee) {
 				buttons[2].setEnabled(false);
 				buttons[3].setEnabled(false);
 				buttons[2].setBackground(Color.LIGHT_GRAY);
@@ -103,7 +103,7 @@ class Options extends JFrame implements ActionListener {
 		}
 		else if(e.getSource() == buttons[2]) {	//register cashier (Admin)
 			try {
-				new RegisterCashier();
+				new RegisterEmployee();
 			} catch (FileNotFoundException e1) {
 				JOptionPane.showMessageDialog(null, "Cashier List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
@@ -112,7 +112,7 @@ class Options extends JFrame implements ActionListener {
 		}
 		else if(e.getSource() == buttons[3]) {	//check products (Admin)
 			try {
-				new CheckProduct();
+				new CheckPatient();
 			} catch (FileNotFoundException e1) {
 				JOptionPane.showMessageDialog(null, "Product List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
@@ -121,7 +121,7 @@ class Options extends JFrame implements ActionListener {
 		}
 		else if(e.getSource() == buttons[4]) {	//select product (Cashier)
 			try {
-				new SelectProduct();
+				new SelectPatient();
 			} catch (FileNotFoundException e1) {
 				JOptionPane.showMessageDialog(null, "Product List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();

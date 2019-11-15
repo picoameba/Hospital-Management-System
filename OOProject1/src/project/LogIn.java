@@ -1,4 +1,4 @@
-package kuGrocery;
+package project;
 
 import java.awt.*;
 import java.awt.event.*;

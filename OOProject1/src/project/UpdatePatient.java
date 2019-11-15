@@ -1,4 +1,4 @@
-package kuGrocery;
+package project;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.util.*;
 
 //class used by the admin to update the details of a product 
 
-class UpdateProduct extends JFrame implements ActionListener, PrintToFile{
+class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 	
 	//declare the JFrame elements
 	private JButton cancel = new JButton("Cancel");
@@ -33,7 +33,7 @@ class UpdateProduct extends JFrame implements ActionListener, PrintToFile{
 	//**********************************************************************************************
 	//constructor
 	
-	public UpdateProduct(Product p) {
+	public UpdatePatient(Patient p) {
 		super("Update Product"); //the title of the JFrame
 		setLayout(new GridLayout(9,2)); //set Layout to GridLayout with 9 rows and two columns
 		tname = new JTextField(p.getName());
@@ -70,7 +70,7 @@ class UpdateProduct extends JFrame implements ActionListener, PrintToFile{
 	
 	public void printToFile(Object p) throws IOException{
 		Scanner fin =  new Scanner (new FileReader("products.txt"));
-		ArrayList<Product> products = new ArrayList<>();
+		ArrayList<Patient> products = new ArrayList<>();
 		String description;
 		
 		while (fin.hasNextLine()) {
@@ -86,14 +86,14 @@ class UpdateProduct extends JFrame implements ActionListener, PrintToFile{
 				description = cin.nextLine();
 			else
 				description = "";
-			products.add(new Product (name,id,catagory,size,price,picture,quant,description));
+			products.add(new Patient (name,id,catagory,size,price,picture,quant,description));
 			cin.close();
 		}
 		fin.close();
 		
 		PrintWriter fout =  new PrintWriter ("products.txt");
-		for (Product Pro: products) 
-			if (Pro.getId() ==  ((Product)p).getId())
+		for (Patient Pro: products) 
+			if (Pro.getId() ==  ((Patient)p).getId())
 				fout.println(p);
 			else
 				fout.println(Pro);
@@ -107,7 +107,7 @@ class UpdateProduct extends JFrame implements ActionListener, PrintToFile{
 		if (e.getSource() == cancel) { //actions for the cancel Button
 			try {
 				dispose();
-				new CheckProduct();
+				new CheckPatient();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Product File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
@@ -131,11 +131,11 @@ class UpdateProduct extends JFrame implements ActionListener, PrintToFile{
 					JOptionPane.showMessageDialog(null, "Please fill Name,Catagory,Size and Picture" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					Product pro = new Product(name,id,catagory,size,price,picture,quant,desc);
+					Patient pro = new Patient(name,id,catagory,size,price,picture,quant,desc);
 					printToFile(pro);
 					JOptionPane.showMessageDialog(null, "Product List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
 					dispose();
-					new CheckProduct();
+					new CheckPatient();
 				}
 			}
 			catch(Exception e1) {

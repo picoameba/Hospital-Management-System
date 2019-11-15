@@ -1,4 +1,4 @@
-package kuGrocery;
+package project;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 
-public class UpdateCashier extends JFrame implements ActionListener, PrintToFile{
+public class UpdateEmployee extends JFrame implements ActionListener, PrintToFile{
 
 	//declare the JFrame elements
 	private JButton cancel = new JButton("Cancel");
@@ -21,7 +21,7 @@ public class UpdateCashier extends JFrame implements ActionListener, PrintToFile
 	//**********************************************************************************************
 	//constructor
 
-	public UpdateCashier(Cashier c) {
+	public UpdateEmployee(Employee c) {
 		super("Update Cashier"); //the title of the JFrame
 		setLayout(new GridLayout(4,2)); //set Layout to GridLayout with 9 rows and two columns
 
@@ -51,20 +51,20 @@ public class UpdateCashier extends JFrame implements ActionListener, PrintToFile
 
 	public void printToFile(Object c) throws IOException{
 		Scanner fin =  new Scanner (new FileReader("Cashier.txt"));
-		ArrayList<Cashier> cashiers = new ArrayList<>();
+		ArrayList<Employee> cashiers = new ArrayList<>();
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
 			String name = cin.next();
 			int id =  cin.nextInt();
 			String password = cin.next();
-			cashiers.add(new Cashier (name,id,password));
+			cashiers.add(new Employee (name,id,password));
 			cin.close();
 		}
 		fin.close();
 
 		PrintWriter fout =  new PrintWriter ("Cashier.txt");
-		for (Cashier cash: cashiers) 
-			if (cash.getId() ==  ((Cashier)c).getId())
+		for (Employee cash: cashiers) 
+			if (cash.getId() ==  ((Employee)c).getId())
 				fout.println(c);
 			else
 				fout.println(cash);
@@ -96,7 +96,7 @@ public class UpdateCashier extends JFrame implements ActionListener, PrintToFile
 		if (e.getSource() == cancel) { //actions for the cancel Button
 			try {
 				dispose();
-				new RegisterCashier();
+				new RegisterEmployee();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Product File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
@@ -123,11 +123,11 @@ public class UpdateCashier extends JFrame implements ActionListener, PrintToFile
 						JOptionPane.showMessageDialog(null, "Please provide the name and password" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
 					}
 					else {
-						Cashier cash = new Cashier(name,id,password);
+						Employee cash = new Employee(name,id,password);
 						printToFile(cash);
 						JOptionPane.showMessageDialog(null, "Cashier List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
 						dispose();
-						new RegisterCashier();
+						new RegisterEmployee();
 					}
 					}
 					else

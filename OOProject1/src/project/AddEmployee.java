@@ -1,20 +1,20 @@
-package kuGrocery;
+package project;
 
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
-import kuGrocery.Cashier;
-import kuGrocery.UpdateCashier;
+import project.Employee;
+import project.UpdateEmployee;
 
 import java.awt.event.*;
 
 
-class AddCashier extends UpdateCashier {
+class AddEmployee extends UpdateEmployee {
 
 	//constructor
-	public AddCashier(ArrayList<Cashier> cashiers) {
-		super(new Cashier());
+	public AddEmployee(ArrayList<Employee> cashiers) {
+		super(new Employee());
 		setTitle("Add Cashier");
 		update.setText("Add");
 		int lastCashier = cashiers.size() - 1;
