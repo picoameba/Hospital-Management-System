@@ -1,0 +1,30 @@
+Book 1000 Stationary Small 8.0 Book 20  An excellent source of knowledge
+Book 1001 Stationary Large 11.0 Book 20  An excellent source of knowledge
+Notebook 1002 Stationary Small 5.0 Notebook 50  You can write notes on it!
+Notebook 1003 Stationary Large 7.0 Notebook 50  You can write notes on it!
+Paper 1004 Stationary Small 10.0 Paper 3000  Useful for printing
+Paper 1005 Stationary Large 15.0 Paper 3000  Useful for printing
+Pencil 1008 Stationary Small 75.0 Pencil 500  You can write and erase with it
+Pencil 1009 Stationary Large 150.0 Pencil 500  You can write and erase with it
+Pen 1006 Stationary Small 9.0 Pen 150  You can only write with it
+Pen 1007 Stationary Large 13.0 Pen 150  You can only write with it
+Bounty 2000 Sweets Small 1.5 Bounty 78  Best chocolate
+Bounty 2001 Sweets Large 2.0 Bounty 100  Best chocolate
+Kinder 2002 Sweets Small 1.5 Kinder 35  Not bad
+Kinder 2003 Sweets Large 2.0 Kinder 35  Not bad
+Kitkat 2004 Sweets Small 1.5 Kitkat 23  Can be good 
+Kitkat 2005 Sweets Large 2.0 Kitkat 40  Can be good 
+Snickers 2006 Sweets Small 1.5 Snickers 80  Who eats this?
+Snickers 2007 Sweets Large 2.0 Snickers 80  Who eats this?
+Twix 2008 Sweets Small 1.5 Twix 95  Excellent
+Twix 2009 Sweets Large 2.0 Twix 95  Excellent
+Cola 3000 Drink Small 1.0 Cola 50  A drink that contains gases
+Cola 3001 Drink Large 1.5 Cola 50  A drink that contains gases
+Mirinda 3002 Drink Small 1.5 Mirinda 65  Pepsi, only yellow
+Mirinda 3003 Drink Large 2.0 Mirinda 65  Pepsi, only yellow
+Pepsi 3004 Drink Small 1.0 Pepsi 50  You know what this is
+Pepsi 3005 Drink Large 1.5 Pepsi 50  You know what this is
+Sevenup 3006 Drink Small 1.5 Sevenup 70  Pepsi, only green
+Sevenup 3007 Drink Large 1.5 Sevenup 70  Pepsi, only yellow
+Water 3008 Drink Small 0.5 Water 200  A drink that doesn't contain gases. Hooray!
+Water 3009 Drink Large 1.0 Water 200  A drink that doesn't contain gases. Hooray!
