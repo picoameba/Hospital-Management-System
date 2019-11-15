@@ -11,9 +11,9 @@ public class UpdateEmployee extends JFrame implements ActionListener, PrintToFil
 	//declare the JFrame elements
 	private JButton cancel = new JButton("Cancel");
 	protected JButton update = new JButton("Update");
-	private JLabel name = new JLabel("Name of The Cashier:");
-	private JLabel id = new JLabel("ID of The Cashier:");
-	private JLabel pass = new JLabel("Password of The Cashier:");
+	private JLabel name = new JLabel("Name of The employee:");
+	private JLabel id = new JLabel("ID of The employee:");
+	private JLabel pass = new JLabel("Password of The employee:");
 	protected JTextField tname;
 	protected JTextField tid;
 	private JTextField tpass;
@@ -22,7 +22,7 @@ public class UpdateEmployee extends JFrame implements ActionListener, PrintToFil
 	//constructor
 
 	public UpdateEmployee(Employee c) {
-		super("Update Cashier"); //the title of the JFrame
+		super("Update employee"); //the title of the JFrame
 		setLayout(new GridLayout(4,2)); //set Layout to GridLayout with 9 rows and two columns
 
 		tname = new JTextField(c.getName());
@@ -47,23 +47,23 @@ public class UpdateEmployee extends JFrame implements ActionListener, PrintToFil
 	}
 
 	//**********************************************************************************************
-	//updates the details of the cashier in the Cashiers file
+	//updates the details of the employee in the employees file
 
 	public void printToFile(Object c) throws IOException{
-		Scanner fin =  new Scanner (new FileReader("Cashier.txt"));
-		ArrayList<Employee> cashiers = new ArrayList<>();
+		Scanner fin =  new Scanner (new FileReader("employee.txt"));
+		ArrayList<Employee> employees = new ArrayList<>();
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
 			String name = cin.next();
 			int id =  cin.nextInt();
 			String password = cin.next();
-			cashiers.add(new Employee (name,id,password));
+			employees.add(new Employee (name,id,password));
 			cin.close();
 		}
 		fin.close();
 
-		PrintWriter fout =  new PrintWriter ("Cashier.txt");
-		for (Employee cash: cashiers) 
+		PrintWriter fout =  new PrintWriter ("employee.txt");
+		for (Employee cash: employees) 
 			if (cash.getId() ==  ((Employee)c).getId())
 				fout.println(c);
 			else
@@ -74,7 +74,7 @@ public class UpdateEmployee extends JFrame implements ActionListener, PrintToFil
 	//**********************************************************************************************
 	//checks if name already exists 
 	public boolean checkUserExists(String user) throws FileNotFoundException{
-		Scanner fin =  new Scanner (new FileReader("Cashier.txt"));
+		Scanner fin =  new Scanner (new FileReader("employee.txt"));
 		while (fin.hasNextLine()) {
 			String name = fin.next();				
 			if (user.equals(name)) {
@@ -109,7 +109,7 @@ public class UpdateEmployee extends JFrame implements ActionListener, PrintToFil
 				if (!name.equals("")) {
 					int id =  Integer.parseInt(tid.getText());
 					String password = tpass.getText();
-					Scanner fin = new Scanner(new FileReader("Cashier.txt"));
+					Scanner fin = new Scanner(new FileReader("employee.txt"));
 					boolean check=true;
 					while (fin.hasNext()) {
 						String name1= fin.next();
@@ -125,7 +125,7 @@ public class UpdateEmployee extends JFrame implements ActionListener, PrintToFil
 					else {
 						Employee cash = new Employee(name,id,password);
 						printToFile(cash);
-						JOptionPane.showMessageDialog(null, "Cashier List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "employee List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
 						dispose();
 						new RegisterEmployee();
 					}

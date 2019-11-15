@@ -1,5 +1,5 @@
 package project;
-//class of the frame that will show the product's picture and details and asks the cashier for the quantity
+//class of the frame that will show the product's picture and details and asks the employee for the quantity
 
 import javax.imageio.*;
 import javax.swing.*;
@@ -72,7 +72,7 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 
 	//**********************************************************************************************
 	//method that check if quantity is positive or negative and 
-	//checks if the quantity that the cashier asks for is more than the product quantity or not
+	//checks if the quantity that the employee asks for is more than the product quantity or not
 
 	public boolean checkQuant(int quantity, Patient p) {
 		if (quantity >= 0)

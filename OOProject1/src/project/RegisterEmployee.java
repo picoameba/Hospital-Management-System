@@ -11,19 +11,19 @@ import java.util.*;
 
 class RegisterEmployee extends JFrame implements ActionListener{
 
-	private JLabel cashName = new JLabel ("Cashier Name");
-	private JLabel cashID = new JLabel ("Cashier ID");
-	private JLabel cashPass = new JLabel ("Cashier Pass");
+	private JLabel cashName = new JLabel ("employee Name");
+	private JLabel cashID = new JLabel ("employee ID");
+	private JLabel cashPass = new JLabel ("employee Pass");
 	private JTextArea []textAreas = new JTextArea[3];
-	private JButton addCash = new JButton ("Add Cashier");
-	private JButton updateCash = new JButton ("Update Cashier");
-	private JButton removeCash = new JButton ("Remove Cashier");
+	private JButton addCash = new JButton ("Add employee");
+	private JButton updateCash = new JButton ("Update employee");
+	private JButton removeCash = new JButton ("Remove employee");
 	private JButton close = new JButton ("Close");
 	private JScrollPane scrollPane; //JScrollPane that will include the textAreas
 	private JPanel p1 = new JPanel(new GridLayout(1,3));
 	private JPanel p2 = new JPanel(new GridLayout(1,3));
 	private JPanel p3 = new JPanel(new GridLayout(1,4));
-	private ArrayList<Employee> cashiersList;
+	private ArrayList<Employee> employeesList;
 
 	//**********************************************************************************************
 	//constructor
@@ -36,8 +36,8 @@ class RegisterEmployee extends JFrame implements ActionListener{
 		textAreas[1].setEditable(false);
 		textAreas[2].setEditable(false);
 
-		Scanner fin = new Scanner(new FileReader("Cashier.txt"));
-		cashiersList = new ArrayList<>();
+		Scanner fin = new Scanner(new FileReader("employee.txt"));
+		employeesList = new ArrayList<>();
 
 		while (fin.hasNext()) {
 			Scanner cin = new Scanner(fin.nextLine());
@@ -47,7 +47,7 @@ class RegisterEmployee extends JFrame implements ActionListener{
 			textAreas[0].append(name+"\n");
 			textAreas[1].append(id+"\n");
 			textAreas[2].append(pass+"\n");
-			cashiersList.add(new Employee (name,id,pass));
+			employeesList.add(new Employee (name,id,pass));
 			cin.close();
 		}
 		fin.close();
@@ -87,11 +87,11 @@ class RegisterEmployee extends JFrame implements ActionListener{
 		if (e.getSource() == close) {	//close the frame
 			dispose();
 		}
-		else if(e.getSource() == removeCash) {	//remove a cashier
-			String s =  JOptionPane.showInputDialog(null, "Enter The Cashier ID", "Search Cashier by ID", JOptionPane.QUESTION_MESSAGE);
+		else if(e.getSource() == removeCash) {	//remove a employee
+			String s =  JOptionPane.showInputDialog(null, "Enter The employee ID", "Search employee by ID", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
-				PrintWriter fout =  new PrintWriter ("Cashier.txt");
+				PrintWriter fout =  new PrintWriter ("employee.txt");
 				boolean check = false;
 				Scanner rname = new Scanner(textAreas[0].getText());
 				Scanner rid = new Scanner(textAreas[1].getText());
@@ -110,7 +110,7 @@ class RegisterEmployee extends JFrame implements ActionListener{
 				rpass.close();
 				fout.close();
 				if (check) {
-					JOptionPane.showMessageDialog(null, "The cashier was removed seccussfully" , "Successful" , JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "The employee was removed seccussfully" , "Successful" , JOptionPane.INFORMATION_MESSAGE);
 					dispose();
 					new RegisterEmployee();
 				}
@@ -122,16 +122,16 @@ class RegisterEmployee extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Invaild ID" , "Error" , JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		else if(e.getSource() == addCash) {//add a cashier
-			new AddEmployee(cashiersList);
+		else if(e.getSource() == addCash) {//add a employee
+			new AddEmployee(employeesList);
 			dispose();
 		}
-		else if (e.getSource() == updateCash){ //update a cashier
-			String s =  JOptionPane.showInputDialog(null, "Enter The Cashier ID", "Search Cashier by ID", JOptionPane.QUESTION_MESSAGE);
+		else if (e.getSource() == updateCash){ //update a employee
+			String s =  JOptionPane.showInputDialog(null, "Enter The employee ID", "Search employee by ID", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
 				boolean check = false;
-				for (Employee cash: cashiersList) {
+				for (Employee cash: employeesList) {
 					if (cash.getId() == i) {
 						dispose();
 						new UpdateEmployee(cash);
@@ -139,7 +139,7 @@ class RegisterEmployee extends JFrame implements ActionListener{
 					}
 				}
 				if (!check)
-					JOptionPane.showMessageDialog(null, "The Cashier ID is not found" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "The employee ID is not found" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
 
 			}catch (Exception e1){
 				e1.printStackTrace();

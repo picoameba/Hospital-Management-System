@@ -25,7 +25,7 @@ public class POS {
 			fin = new Scanner (new FileReader("Admin.txt"));
 		}
 		else {
-			fin = new Scanner (new FileReader("Cashier.txt"));
+			fin = new Scanner (new FileReader("employee.txt"));
 		} 
 
 		//***************************************************************

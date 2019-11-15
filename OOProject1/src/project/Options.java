@@ -13,7 +13,7 @@ class Options extends JFrame implements ActionListener {
 	private JTextArea info = new JTextArea();
 	private JButton[] buttons = new JButton[6];
 	private String[] buttonNames = {"Log In", "Log Out", 
-			"Check Cashiers", "Check Products", 
+			"Check employees", "Check Products", 
 			"Select Product", "Purchase Menu"};
 	//initializes variables needed for the frame
 
@@ -101,14 +101,14 @@ class Options extends JFrame implements ActionListener {
 			info.append("Logged out successfully!");
 			//closes all buttons besides log in and removes the active account
 		}
-		else if(e.getSource() == buttons[2]) {	//register cashier (Admin)
+		else if(e.getSource() == buttons[2]) {	//register employee (Admin)
 			try {
 				new RegisterEmployee();
 			} catch (FileNotFoundException e1) {
-				JOptionPane.showMessageDialog(null, "Cashier List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "employee List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
 			}
-			info.append("Registering new cashier.\n");
+			info.append("Registering new employee.\n");
 		}
 		else if(e.getSource() == buttons[3]) {	//check products (Admin)
 			try {
@@ -119,7 +119,7 @@ class Options extends JFrame implements ActionListener {
 			}
 			info.append("Checking products.\n");
 		}
-		else if(e.getSource() == buttons[4]) {	//select product (Cashier)
+		else if(e.getSource() == buttons[4]) {	//select product (employee)
 			try {
 				new SelectPatient();
 			} catch (FileNotFoundException e1) {
@@ -128,7 +128,7 @@ class Options extends JFrame implements ActionListener {
 			}
 			info.append("Selecting product.\n");
 		}
-		else if(e.getSource() == buttons[5]) {	//purchase (Cashier)
+		else if(e.getSource() == buttons[5]) {	//purchase (employee)
 			try {
 				new CheckOut();
 				info.append("Purchase complete!\n");

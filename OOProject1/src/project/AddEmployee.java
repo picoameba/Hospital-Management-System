@@ -13,12 +13,12 @@ import java.awt.event.*;
 class AddEmployee extends UpdateEmployee {
 
 	//constructor
-	public AddEmployee(ArrayList<Employee> cashiers) {
+	public AddEmployee(ArrayList<Employee> employees) {
 		super(new Employee());
-		setTitle("Add Cashier");
+		setTitle("Add employee");
 		update.setText("Add");
-		int lastCashier = cashiers.size() - 1;
-		int newId = cashiers.get(lastCashier).getId() + 1;
+		int lastemployee = employees.size() - 1;
+		int newId = employees.get(lastemployee).getId() + 1;
 		tid.setText(Integer.toString(newId));
 	}
 
@@ -26,7 +26,7 @@ class AddEmployee extends UpdateEmployee {
 	//method that adds a product to the file
 
 	public void printToFile(Object c) throws IOException{
-		PrintWriter fout =  new PrintWriter (new FileWriter("cashier.txt", true));//appends to the file
+		PrintWriter fout =  new PrintWriter (new FileWriter("employee.txt", true));//appends to the file
 		fout.println(c);
 		fout.close();
 	}
@@ -46,7 +46,7 @@ class AddEmployee extends UpdateEmployee {
 			}
 			catch (FileNotFoundException e1) {
 				e1.printStackTrace();
-				JOptionPane.showMessageDialog(null, "Cashier File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "employee File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		else { //action for the cancel Button

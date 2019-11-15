@@ -14,7 +14,7 @@ class LogIn extends JFrame implements ActionListener {
 	private JTextField id = new JTextField();
 	private JTextField pass = new JTextField();
 	private JButton admin = new JButton("Log In as Admin");
-	private JButton cashier = new JButton("Log In as Cashier");
+	private JButton employee = new JButton("Log In as employee");
 	//creates elements needed for frame
 	
 	//***************************************************************
@@ -27,7 +27,7 @@ class LogIn extends JFrame implements ActionListener {
 
 		add(userLabel);		add(id);
 		add(passLabel);		add(pass);
-		add(admin);			add(cashier);
+		add(admin);			add(employee);
 
 		setSize(450, 450);
 		setVisible(true);
@@ -35,7 +35,7 @@ class LogIn extends JFrame implements ActionListener {
 		setBackground(Color.BLUE);
 
 		admin.addActionListener(this);
-		cashier.addActionListener(this);
+		employee.addActionListener(this);
 	}
 	//***************************************************************
 	//action listener
@@ -50,11 +50,11 @@ class LogIn extends JFrame implements ActionListener {
 				e1.printStackTrace();
 			}
 		}
-		else if(e.getSource() == cashier) {
+		else if(e.getSource() == employee) {
 			try {
-				POS.authenticate("Cashier", id.getText(), pass.getText());
+				POS.authenticate("employee", id.getText(), pass.getText());
 				dispose();
-				//authenticates if the user is a cashier, then closes this frame
+				//authenticates if the user is a employee, then closes this frame
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}

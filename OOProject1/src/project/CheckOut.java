@@ -9,13 +9,13 @@ import java.time.format.*;
 import java.util.*;
 
 
-//frame that will show the cashier billing details, and provide the options to add or remove product, change the quantity,
+//frame that will show the employee billing details, and provide the options to add or remove product, change the quantity,
 //and proceed to purchase.
 
 class CheckOut extends JFrame implements ActionListener{
 
 	private Scanner fin;
-	private String cashierName;
+	private String employeeName;
 	//declare an array to use it in the JLabel
 	private String [] labelNames =  {"Name", "ID", "Size", "Price", "Availble Quantity", "Selected Quantity", "Total Price"};
 	//Declare the JFrame elements
@@ -47,7 +47,7 @@ class CheckOut extends JFrame implements ActionListener{
 		super ("Check Out"); 
 		
 		fin =  new Scanner (new FileReader("Temp.txt")); //read from temp.txt file to show the product information
-		cashierName  = POS.getActiveAccount().getName();
+		employeeName  = POS.getActiveAccount().getName();
 		
 		for (int i = 0; i<labelNames.length; i++) { //add the text areas and labels to the correct place
 			jLabels[i] = new JLabel(labelNames[i]);
@@ -333,7 +333,7 @@ class CheckOut extends JFrame implements ActionListener{
 				fout.printf("VAT: %s %n", tvat.getText());
 				fout.printf("Total Amount with the VAT: %s %n", tpriceVat.getText());
 				fout.println("\nBill Date and Time: " + dtf.format(now));
-				fout.println("\nCashier Name: " + cashierName);
+				fout.println("\nemployee Name: " + employeeName);
 				fout.println("\nThank You");
 
 
