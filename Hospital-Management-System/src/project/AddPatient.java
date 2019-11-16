@@ -63,7 +63,7 @@ class AddPatient extends UpdatePatient implements ActionListener{
 			}
 			catch (FileNotFoundException e1) {
 				e1.printStackTrace();
-				JOptionPane.showMessageDialog(null, "patients File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "patient's File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		else { //action for the cancel Button

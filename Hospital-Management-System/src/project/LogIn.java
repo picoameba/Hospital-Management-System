@@ -14,7 +14,7 @@ class LogIn extends JFrame implements ActionListener {
 	private JTextField id = new JTextField();
 	private JTextField pass = new JTextField();
 	private JButton admin = new JButton("Log In as Admin");
-	private JButton employee = new JButton("Log In as employee");
+	private JButton employee = new JButton("Log In as Employee");
 	//creates elements needed for frame
 	
 	//***************************************************************

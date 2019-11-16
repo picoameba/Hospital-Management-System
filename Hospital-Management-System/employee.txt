@@ -1,2 +1,2 @@
-Cashier 10001 Cash123
-Hamza 10002 HI
+ahmad 10001 ahmad123
+ali 10002 ali123
