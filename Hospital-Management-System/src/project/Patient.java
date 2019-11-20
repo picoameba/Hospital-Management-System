@@ -3,7 +3,7 @@ package project;
 public class Patient {
 	
 	// declare the patients variables
-	private String name, category, size, description, picture;
+	private String name, category, size, description, picture, mobileNumber, email;
 	private int id, quantity;
 	private double price;
 	// end declaration
@@ -68,6 +68,18 @@ public class Patient {
 	}
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public int getId() {
 		return id;
