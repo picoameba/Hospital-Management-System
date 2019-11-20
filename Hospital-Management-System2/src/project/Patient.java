@@ -21,7 +21,7 @@ public class Patient {
 		this.bill = 0;
 		this.medicinePrec = "";
 	}
-
+//
 	//**********************************************************************************************
 	//initialize the patients information
 	public Patient(String name, int id, String catagory, String appointments, double bill,
