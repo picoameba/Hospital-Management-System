@@ -3,9 +3,9 @@ package project;
 public class Patient {
 	
 	// declare the patients variables
-	private String name, category, size, description, picture;
+	private String name, gender, appointments, medicinePrec ;
 	private int id, quantity;
-	private double price;
+	private double bill;
 	// end declaration
 
 	//**********************************************************************************************
@@ -14,26 +14,26 @@ public class Patient {
 	public Patient() {
 		this.name = "";
 		this.id = 0;
-		this.category = "";
-		this.size = "";
-		this.picture = "";
+		this.gender = "";
+		this.appointments = "";
+		
 		this.quantity = 0;
-		this.price = 0;
-		this.description = "";
+		this.bill = 0;
+		this.medicinePrec = "";
 	}
 
 	//**********************************************************************************************
 	//initialize the patients information
-	public Patient(String name, int id, String catagory, String size, double price,
-			String picture,  int quant, String discription) {
+	public Patient(String name, int id, String catagory, String appointments, double bill,
+			  int quant, String discription) {
 		this.name = name;
 		this.id = id;
-		this.category = catagory;
-		this.size = size;
-		this.picture = picture;
+		this.gender = catagory;
+		this.appointments = appointments;
+	
 		this.quantity = quant;
-		this.price = price;
-		this.description = discription;
+		this.bill = bill;
+		this.medicinePrec = discription;
 	}
 
 	//**********************************************************************************************
@@ -46,29 +46,24 @@ public class Patient {
 		this.name = name;
 	}
 	public String getCatagory() {
-		return category;
+		return gender;
 	}
 	public void setCatagory(String catagory) {
-		this.category = catagory;
+		this.gender = catagory;
 	}
-	public String getSize() {
-		return size;
+	public String getappointments() {
+		return appointments;
 	}
-	public void setSize(String size) {
-		this.size = size;
+	public void setappointments(String appointments) {
+		this.appointments = appointments;
 	}
-	public String getDescription() {
-		return description;
+	public String getmedicinePrec() {
+		return medicinePrec;
 	}
 	public void setDiscription(String discription) {
-		this.description = discription;
+		this.medicinePrec = discription;
 	}
-	public String getPicture() {
-		return picture;
-	}
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
+
 	public int getId() {
 		return id;
 	}
@@ -81,11 +76,11 @@ public class Patient {
 	public void setQuant(int quant) {
 		this.quantity = quant;
 	}
-	public double getPrice() {
-		return price;
+	public double getbill() {
+		return bill;
 	}
-	public void setPrice(double price) {
-		this.price = price;
+	public void setbill(double bill) {
+		this.bill = bill;
 	}
 	// end setter and getter methods
 
@@ -95,15 +90,15 @@ public class Patient {
 	public void makeCopy(Patient p) {
 		name =  p.getName();
 		id =  p.getId();
-		category = p.getCatagory();
-		size = p.getSize();
-		picture = p.getPicture();
+		gender = p.getCatagory();
+		appointments = p.getappointments();
+		
 		quantity = p.getQuantity();
-		price = p.getPrice();
-		description = p.getDescription();
+		bill = p.getbill();
+		medicinePrec = p.getmedicinePrec();
 	}
 	//**********************************************************************************************
 	public String toString() {
-		return name +" "+id+" "+ category +" "+ size+" "+price+" "+picture+" "+quantity+" "+ description;
+		return name +" "+id+" "+ gender +" "+ appointments+" "+bill+" "+" "+quantity+" "+ medicinePrec;
 	}
 }//endpatient
