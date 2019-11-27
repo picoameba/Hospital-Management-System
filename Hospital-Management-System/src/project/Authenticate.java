@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
-public class POS {
+public class Authenticate {
 
 	private static Admin activeAccount;
 

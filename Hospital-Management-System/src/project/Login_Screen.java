@@ -5,6 +5,8 @@
  */
 package project;
 
+import java.io.FileNotFoundException;
+
 /**
  *
  * @author jeffe
@@ -34,7 +36,7 @@ public class Login_Screen extends javax.swing.JFrame {
         Password = new javax.swing.JPasswordField();
         CheckBoxAdmin = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
-
+        jbutton=new javax.swing.JButton();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Hospital Logo");
@@ -42,8 +44,10 @@ public class Login_Screen extends javax.swing.JFrame {
         jLabel2.setText("Username:");
 
         jLabel3.setText("Password:");
+        
+        jbutton.setText("Login");
 
-        UserName.addActionListener(new java.awt.event.ActionListener() {
+        jbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UserNameActionPerformed(evt);
             }
@@ -78,6 +82,7 @@ public class Login_Screen extends javax.swing.JFrame {
                             .addComponent(CheckBoxAdmin)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(Password)
+                               .addComponent(jbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(UserName, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
@@ -99,6 +104,7 @@ public class Login_Screen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(CheckBoxAdmin)
                 .addContainerGap(277, Short.MAX_VALUE))
@@ -107,12 +113,30 @@ public class Login_Screen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void UserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameActionPerformed
+    @SuppressWarnings("deprecation")
+	private void UserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserNameActionPerformed
         // TODO add your handling code here:
+    	try {
+			Authenticate.authenticate("employee", UserName.getText(), Password.getText());
+			dispose();
+			//authenticates if the user is a employee, then closes this frame
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
     }//GEN-LAST:event_UserNameActionPerformed
 
-    private void CheckBoxAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxAdminActionPerformed
+    @SuppressWarnings("deprecation")
+	private void CheckBoxAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckBoxAdminActionPerformed
         // TODO add your handling code here:
+    //	if(e.getSource() == admin) {
+			try {
+				Authenticate.authenticate("Admin", UserName.getText(), Password.getText());
+				dispose();
+				//authenticates if the user is an admin, then closes this frame
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+		
     }//GEN-LAST:event_CheckBoxAdminActionPerformed
 
     /**
@@ -159,5 +183,6 @@ public class Login_Screen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jbutton;
     // End of variables declaration//GEN-END:variables
 }

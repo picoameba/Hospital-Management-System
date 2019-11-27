@@ -24,9 +24,9 @@ class Options extends JFrame implements ActionListener {
 	//constructor 
 
 	public Options(boolean userFound) {
-		super("KU Grocery");
+		super("Hospital Management System");
 
-		activeAccount = POS.getActiveAccount(); //sets the active account as it is in the POS
+		activeAccount = Authenticate.getActiveAccount(); //sets the active account as it is in the Authenticate
 
 		operations.setLayout(new GridLayout(3, 2));//
 		setLayout(new GridLayout(2, 1));//
@@ -86,7 +86,7 @@ class Options extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == buttons[0]) {		//log in
-			new LogIn();
+			new Login_Screen().setVisible(true);
 			dispose();
 			//creates a log in frame, then closes this frame
 		}

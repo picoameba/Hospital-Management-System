@@ -43,7 +43,7 @@ class LogIn extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == admin) {
 			try {
-				POS.authenticate("Admin", id.getText(), pass.getText());
+				Authenticate.authenticate("Admin", id.getText(), pass.getText());
 				dispose();
 				//authenticates if the user is an admin, then closes this frame
 			} catch (FileNotFoundException e1) {
@@ -52,7 +52,7 @@ class LogIn extends JFrame implements ActionListener {
 		}
 		else if(e.getSource() == employee) {
 			try {
-				POS.authenticate("employee", id.getText(), pass.getText());
+				Authenticate.authenticate("employee", id.getText(), pass.getText());
 				dispose();
 				//authenticates if the user is a employee, then closes this frame
 			} catch (FileNotFoundException e1) {
