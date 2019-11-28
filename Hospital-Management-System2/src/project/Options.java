@@ -24,9 +24,9 @@ class Options extends JFrame implements ActionListener {
 	//constructor 
 
 	public Options(boolean userFound) {
-		super("Hospital Management System");
+		super("KU Grocery");
 
-		activeAccount = Authenticate.getActiveAccount(); //sets the active account as it is in the Authenticate
+		activeAccount = POS.getActiveAccount(); //sets the active account as it is in the POS
 
 		operations.setLayout(new GridLayout(3, 2));//
 		setLayout(new GridLayout(2, 1));//
@@ -86,7 +86,7 @@ class Options extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == buttons[0]) {		//log in
-			new Login_Screen().setVisible(true);
+			new LogIn();
 			dispose();
 			//creates a log in frame, then closes this frame
 		}
@@ -102,41 +102,20 @@ class Options extends JFrame implements ActionListener {
 			//closes all buttons besides log in and removes the active account
 		}
 		else if(e.getSource() == buttons[2]) {	//register employee (Admin)
-			try {
-				new RegisterEmployee();
-			} catch (FileNotFoundException e1) {
-				JOptionPane.showMessageDialog(null, "employee List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
-				e1.printStackTrace();
-			}
+			new RegisterEmployee();
 			info.append("Registering new employee.\n");
 		}
 		else if(e.getSource() == buttons[3]) {	//check patients (Admin)
-			try {
-				new CheckPatient();
-			} catch (FileNotFoundException e1) {
-				JOptionPane.showMessageDialog(null, "patient List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
-				e1.printStackTrace();
-			}
+			new CheckPatient();
 			info.append("Checking patients.\n");
 		}
 		else if(e.getSource() == buttons[4]) {	//select patient (employee)
-			try {
-				new SelectPatient();
-			} catch (FileNotFoundException e1) {
-				JOptionPane.showMessageDialog(null, "patient List Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
-				e1.printStackTrace();
-			}
+			new SelectPatient();
 			info.append("Selecting patient.\n");
 		}
 		else if(e.getSource() == buttons[5]) {	//purchase (employee)
-			try {
-				new CheckOut();
-				info.append("Purchase complete!\n");
-			}
-			catch (FileNotFoundException e1) {
-				JOptionPane.showMessageDialog(null, "Bill not found" , "404" , JOptionPane.ERROR_MESSAGE);
-				e1.printStackTrace();
-			}
+			new Bill();
+			info.append("Purchase complete!\n");
 		}
 	}
 }

@@ -47,7 +47,7 @@ class CheckOut extends JFrame implements ActionListener{
 		super ("Check Out"); 
 		
 		fin =  new Scanner (new FileReader("Temp.txt")); //read from temp.txt file to show the patient information
-		employeeName  = POS.getActiveAccount().getName();
+		employeeName  = Authenticate.getActiveAccount().getName();
 		
 		for (int i = 0; i<labelNames.length; i++) { //add the text areas and labels to the correct place
 			jLabels[i] = new JLabel(labelNames[i]);
