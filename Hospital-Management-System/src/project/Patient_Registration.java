@@ -5,19 +5,54 @@
  */
 package project;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jeffe
  */
-public class Patient_Registration extends javax.swing.JFrame {
+public class Patient_Registration extends javax.swing.JFrame implements PrintToFile{
 
     /**
      * Creates new form Patient_Registration
      */
+	//method that adds a patient to the file
+	public void printToFile(Object p) throws IOException{
+		PrintWriter fout =  new PrintWriter (new FileWriter("patient.txt", true));//appends to the file
+		fout.println(p);
+		fout.close();
+	}
+	
     public Patient_Registration() {
         initComponents();
     }
 
+    
+    
+  //method that checks if a patient ID exists
+
+  	public boolean checkID(int i) throws FileNotFoundException{
+  		Scanner fin =  new Scanner (new FileReader("patient.txt"));
+  		while (fin.hasNextLine()) {
+  			Scanner cin = new Scanner(fin.nextLine());
+  			String name = cin.next();
+  			int id =  cin.nextInt();
+  			cin.close();
+  			if (id == i)
+  				return true;
+  		}
+  		fin.close();
+  		return false;
+  	}
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,6 +62,9 @@ public class Patient_Registration extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+    	
+    	
+    	
         GenderButtonGroup = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -88,10 +126,39 @@ public class Patient_Registration extends javax.swing.JFrame {
 
         GenderButtonGroup.add(jRadioButton1);
         jRadioButton1.setText("M");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+            
+        		 //action for the update Button
+            			try {
+        				String name = jTextField1.getText();
+        				int age =  Integer.parseInt(jTextField2.getText());
+        				String sex = jRadioButton1.getText();
+        				String bloodType =(String) jComboBox2.getSelectedItem();
+        				
+        				if (age <=  0){ //check if the age  is negative 
+        					JOptionPane.showMessageDialog(null, "Please enter Positive age" , "Invaild age" , JOptionPane.ERROR_MESSAGE);
+        				}
+        			/*	else if (name.equals("") || catagory.equals("")|| size.equals("")|| picture.equals("")){ //check if one of the fields are empty (name,catagory,size and picture)
+        					JOptionPane.showMessageDialog(null, "Please fill Name,Catagory,Size and Picture" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
+        				} */
+        				else {
+        					Patient pro = new Patient(name,age,sex,bloodType);
+        					printToFile(pro);
+        					JOptionPane.showMessageDialog(null, "patient List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
+        					dispose();
+        					new CheckPatient();
+        				}
+        			}
+        			catch(Exception e1) {
+        				e1.printStackTrace();
+        				JOptionPane.showMessageDialog(null, "Invaild input" , "Error" , JOptionPane.ERROR_MESSAGE);
+        			}
+        		
                 jRadioButton1ActionPerformed(evt);
+                
             }
+        			
         });
 
         GenderButtonGroup.add(jRadioButton2);
@@ -243,6 +310,7 @@ public class Patient_Registration extends javax.swing.JFrame {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
+    	
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed

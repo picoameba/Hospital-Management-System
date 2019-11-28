@@ -42,8 +42,8 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 		p2.add(confirm);
 
 		//Print the patient information to check if it is the correct patient
-		details.append("Name:"+selectedpatient.getName()+"\nID:"+selectedpatient.getId()+"\nCatagory:"+selectedpatient.getCatagory()+"\nSize:"+selectedpatient.getSize()
-		+"\nPrice:"+selectedpatient.getPrice()+"\nQuantity:"+selectedpatient.getQuantity()+"\nDescription: "+selectedpatient.getDescription());
+		details.append("Name:"+selectedpatient.getName()+"\nAge:"+selectedpatient.getAge()+"\nSex:"+selectedpatient.getSex()+"\nBloodType:"+selectedpatient.getBloodType()
+		);
 
 		//add the ActionListener to the JButtons
 		cancel.addActionListener(this);
@@ -57,7 +57,9 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 		setSize(600,350);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBackground(Color.RED);
+	}
 		
+	/*	
 		try {
 			BufferedImage img = null;
 		    img = ImageIO.read(new File(P.getPicture()+".jpg"));
@@ -69,32 +71,33 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 		    e.printStackTrace();
 		}
 	}
+	*/
 
 	//**********************************************************************************************
 	//method that check if quantity is positive or negative and 
 	//checks if the quantity that the employee asks for is more than the patient quantity or not
-
+/*
 	public boolean checkQuant(int quantity, Patient p) {
 		if (quantity >= 0)
 			return p.getQuantity()-quantity<0?false:true;
 		else
 			return false;
 	}
-
+*/
 
 	//**********************************************************************************************
-	//method that checks if the patient id exists
+	//method that checks if the patient age exists
 
 	public boolean checkExists (int i) throws FileNotFoundException {
 		Scanner fin =  new Scanner (new FileReader("Temp.txt"));
-		int id;
+		int age;
 
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
 			cin.next();
-			id =  cin.nextInt();
+			age =  cin.nextInt();
 			cin.close();
-			if (id ==  i)
+			if (age ==  i)
 				return true;
 		}
 		fin.close();
@@ -104,9 +107,9 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 	//**********************************************************************************************
 	//prints the details of a purchase to a temporary file, for use when creating the bill
 
-	public void printToTemp(String name, int id, String size, double price, int quant , int selectedQuant) throws FileNotFoundException {
+	public void printToTemp(String name, int age, String bloodType, double price, int quant , int selectedQuant) throws FileNotFoundException {
 		PrintWriter fout = new PrintWriter(new FileOutputStream(new File("Temp.txt"),true));
-		fout.println(name+" "+id+" "+size+" "+price+" "+quant+" "+selectedQuant);
+		fout.println(name+" "+age+" "+bloodType+" "+price+" "+quant+" "+selectedQuant);
 		fout.close();
 	}
 
@@ -122,9 +125,9 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
 			String name = cin.next();
-			int id =  cin.nextInt();
-			String catagory = cin.next();
-			String size = cin.next();
+			int age =  cin.nextInt();
+			String sex = cin.next();
+			String bloodType = cin.next();
 			double price = cin.nextDouble();
 			String picture = cin.next();
 			int quant = cin.nextInt();
@@ -132,15 +135,15 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 				description =  cin.nextLine();
 			else
 				description = "";
-			patients.add(new Patient (name,id,catagory,size,price,picture,quant,description));
+			patients.add(new Patient (name,age,sex,bloodType));
 			cin.close();
 		}
 		fin.close();
 
 		//Print out the updated file
-		PrintWriter fout =  new PrintWriter ("patients.txt");
+		PrintWriter fout =  new PrintWriter ("patient.txt");
 		for (Patient Pro: patients) 
-			if (Pro.getId() == ((Patient)p).getId())
+			if (Pro.getAge() == ((Patient)p).getAge())
 				fout.println(p);
 			else
 				fout.println(Pro);
@@ -160,14 +163,14 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 				JOptionPane.showMessageDialog(null, "patients File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		else //the actions for Confirm JButton which will confirm the patient details and added to the bill
+	/*	else //the actions for Confirm JButton which will confirm the patient details and added to the bill
 		{
 			try {
 				int quantity =  Integer.parseInt(quant.getText());
 				if (checkQuant(quantity,selectedpatient) && quantity != 0) {
-					if (!checkExists(selectedpatient.getId()))
-						printToTemp(selectedpatient.getName(),selectedpatient.getId(),
-								selectedpatient.getSize(),selectedpatient.getPrice(),selectedpatient.getQuantity(),quantity);
+					if (!checkExists(selectedpatient.getAge()))
+						printToTemp(selectedpatient.getName(),selectedpatient.getAge(),
+								selectedpatient.getBloodType(),selectedpatient.getPrice(),selectedpatient.getQuantity(),quantity);
 					else
 						JOptionPane.showMessageDialog(null, "You have this item already!!" , "Item Exists" , JOptionPane.ERROR_MESSAGE);
 					new CheckOut();
@@ -185,5 +188,6 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 				JOptionPane.showMessageDialog(null, "Invaild Input" , "Error" , JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		*/
 	}
 }

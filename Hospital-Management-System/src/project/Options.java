@@ -14,7 +14,7 @@ class Options extends JFrame implements ActionListener {
 	private JButton[] buttons = new JButton[6];
 	private String[] buttonNames = {"Log In", "Log Out", 
 			"Check employees", "Check patients", 
-			"Select patient", "Purchase Menu"};
+			"Select patient", "Check patient bill"};
 	//initializes variables needed for the frame
 
 	private Admin activeAccount;
@@ -130,7 +130,7 @@ class Options extends JFrame implements ActionListener {
 		}
 		else if(e.getSource() == buttons[5]) {	//purchase (employee)
 			try {
-				new CheckOut();
+				new Bill();
 				info.append("Purchase complete!\n");
 			}
 			catch (FileNotFoundException e1) {

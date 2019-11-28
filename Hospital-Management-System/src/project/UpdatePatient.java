@@ -1,4 +1,4 @@
-package project;
+/*package project;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,7 +69,7 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 	//updates the file to match the new patient information
 	
 	public void printToFile(Object p) throws IOException{
-		Scanner fin =  new Scanner (new FileReader("patients.txt"));
+		Scanner fin =  new Scanner (new FileReader("patient.txt"));
 		ArrayList<Patient> patients = new ArrayList<>();
 		String description;
 		
@@ -91,7 +91,7 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 		}
 		fin.close();
 		
-		PrintWriter fout =  new PrintWriter ("patients.txt");
+		PrintWriter fout =  new PrintWriter ("patient.txt");
 		for (Patient Pro: patients) 
 			if (Pro.getId() ==  ((Patient)p).getId())
 				fout.println(p);
@@ -145,3 +145,4 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 		}
 	}
 }
+*/
