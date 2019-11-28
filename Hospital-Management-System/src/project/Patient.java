@@ -13,7 +13,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 */
-public class Patient {
+public class Patient{
 //Variables
 private String firstName, lastName, id, email, gender, bloodType, mobileNumber, telephone, insuranceType;
 private int age;
@@ -109,6 +109,18 @@ public void setHeight(double height) {
 	this.height = height;
 }
 //Other functions
+public void printToFile(Patient p) throws IOException{
+	try {
+		PrintWriter pout = new PrintWriter("Patient.txt");
+			pout.println(p.getId()+" "+p.getFirstName()+" "+p.getLastName()+" "+p.getEmail()+" "+p.getGender()+" "+p.getBloodType()+" "+p.getMobileNumber()+" "+p.getTelephone()+" "
+			+p.getInsuranceType()+" "+p.getAge()+" "+p.getWeight()+" "+p.getHeight());
+		pout.close();
+	}
+	catch(FileNotFoundException b){
+		//Returns location of Exception
+		System.out.println(b.getStackTrace().toString());
+	}
+}
 public void Save_Patient(Vector<Patient> save) {
 	try {
 		PrintWriter pout = new PrintWriter("Patient.txt");
