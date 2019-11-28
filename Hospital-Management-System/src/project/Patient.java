@@ -155,8 +155,15 @@ public Vector<Patient> Loader_Patient(){
 		return temp;
 	}
 }
-public void Patient_History_Writer() {
-	
+public void Patient_History_Writer(String PId, String DId, String time, String date) {
+	try {
+		PrintWriter pout = new PrintWriter(new BufferedWriter(new FileWriter("myfile.txt", true)));
+		
+		pout.close();
+	}
+	catch(FileNotFoundException e) {
+		e.printStackTrace();
+	}
 }
 public void Send_email(String ID) {
 	//Sending the appointment email
