@@ -244,7 +244,7 @@ public void Send_email(String ID) {
             //Sending the message
             Transport.send(message);
         }
-
+*/
     } 
     catch(FileNotFoundException c) {
     	//Printing origin of exception
@@ -257,7 +257,6 @@ public void Send_email(String ID) {
     	//Printing origin of exception
         e.printStackTrace();
     }
-    */
 }
 
 }
