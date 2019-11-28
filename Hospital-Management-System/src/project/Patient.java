@@ -109,7 +109,7 @@ public void setHeight(double height) {
 	this.height = height;
 }
 //Other functions
-public void Save_Patient(Vector<Patient1> save) {
+public void Save_Patient(Vector<Patient> save) {
 	try {
 		PrintWriter pout = new PrintWriter("Patient.txt");
 		for(int i =0; i<save.size();i++)
@@ -129,11 +129,11 @@ public void Save_Patient(Vector<Patient1> save) {
 		System.out.println(b.getStackTrace().toString());
 	}
 }
-public Vector<Patient1> Loader_Patient(){
-	Vector<Patient1> temp=new Vector<Patient1>();
+public Vector<Patient> Loader_Patient(){
+	Vector<Patient> temp=new Vector<Patient>();
 	try {
 		Scanner pin = new Scanner(new FileReader("Patient.txt"));
-		temp.add(new Patient1(id, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height));
+		temp.add(new Patient(id, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height));
 		pin.close();
 		return temp;
 	}

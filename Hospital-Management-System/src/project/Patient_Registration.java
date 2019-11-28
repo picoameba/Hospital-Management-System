@@ -18,14 +18,14 @@ import javax.swing.JOptionPane;
  *
  * @author jeffe
  */
-public class Patient_Registration extends javax.swing.JFrame implements PrintToFile{
+public class Patient_Registration extends javax.swing.JFrame implements PrintToFile {
 
     /**
      * Creates new form Patient_Registration
      */
 	
-	int lastpatient = pat.size() - 1;
-	int newId = pat.get(lastpatient).getId() + 1;
+	int lastpatient = patient.size() - 1;
+	int newId = patient.get(lastpatient).getId() + 1;
 	tid.setText(Integer.toString(newId));
 	
 	
