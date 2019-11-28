@@ -155,10 +155,14 @@ public Vector<Patient> Loader_Patient(){
 		return temp;
 	}
 }
-public void Patient_History_Writer(String PId, String DId, String time, String date) {
+public void Patient_History_Writer(HistoryHolder h) {
 	try {
 		PrintWriter pout = new PrintWriter(new BufferedWriter(new FileWriter("myfile.txt", true)));
-		
+		pout.println(h.getpId()+" "+h.getdId()+" "+h.getTime()+" "+h.getDate());
+		pout.println(h.getStatus()+" "+h.getEventType());
+		pout.println(h.getDiagnosis());
+		pout.println(h.getPrescription());
+		pout.println(h.getLabRequest());
 		pout.close();
 	}
 	catch(FileNotFoundException e) {
