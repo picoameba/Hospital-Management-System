@@ -23,6 +23,12 @@ public class Patient_Registration extends javax.swing.JFrame implements PrintToF
     /**
      * Creates new form Patient_Registration
      */
+	
+	int lastpatient = pat.size() - 1;
+	int newId = pat.get(lastpatient).getId() + 1;
+	tid.setText(Integer.toString(newId));
+	
+	
 	//method that adds a patient to the file
 	public void printToFile(Object p) throws IOException{
 		PrintWriter fout =  new PrintWriter (new FileWriter("patient.txt", true));//appends to the file

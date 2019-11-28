@@ -3,37 +3,28 @@ package project;
 public class Patient {
 	
 	// declare the patients variables
-	private String name, gender, appointments, medicinePrec ;
-	private int id, quantity;
-	private double bill;
+	private String name,sex,bloodType;
+	private int age;
+	
 	// end declaration
 
 	//**********************************************************************************************
 	//initialize the patient to default with default constructor
 
 	public Patient() {
-		this.name = "";
-		this.id = 0;
-		this.gender = "";
-		this.appointments = "";
-		
-		this.quantity = 0;
-		this.bill = 0;
-		this.medicinePrec = "";
+		name = "";
+		age=0;
+		sex="";
+		bloodType="";
 	}
-//
+
 	//**********************************************************************************************
 	//initialize the patients information
-	public Patient(String name, int id, String catagory, String appointments, double bill,
-			  int quant, String discription) {
+	public Patient(String name,int age,String sex,String bloodType) {
 		this.name = name;
-		this.id = id;
-		this.gender = catagory;
-		this.appointments = appointments;
-	
-		this.quantity = quant;
-		this.bill = bill;
-		this.medicinePrec = discription;
+		this.age=age;
+		this.sex=sex;
+		this.bloodType=bloodType;
 	}
 
 	//**********************************************************************************************
@@ -45,43 +36,26 @@ public class Patient {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCatagory() {
-		return gender;
+	public String getSex() {
+		return sex;
 	}
-	public void setCatagory(String catagory) {
-		this.gender = catagory;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
-	public String getappointments() {
-		return appointments;
+	public String getBloodType() {
+		return bloodType;
 	}
-	public void setappointments(String appointments) {
-		this.appointments = appointments;
-	}
-	public String getmedicinePrec() {
-		return medicinePrec;
-	}
-	public void setDiscription(String discription) {
-		this.medicinePrec = discription;
+	public void setBloodType(String bloodType) {
+		this.bloodType = bloodType;
 	}
 
-	public int getId() {
-		return id;
+	public int getAge() {
+		return age;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setAge(int age) {
+		this.age = age;
 	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuant(int quant) {
-		this.quantity = quant;
-	}
-	public double getbill() {
-		return bill;
-	}
-	public void setbill(double bill) {
-		this.bill = bill;
-	}
+
 	// end setter and getter methods
 
 	//**********************************************************************************************
@@ -89,16 +63,13 @@ public class Patient {
 
 	public void makeCopy(Patient p) {
 		name =  p.getName();
-		id =  p.getId();
-		gender = p.getCatagory();
-		appointments = p.getappointments();
+		age =  p.getAge();
+		sex = p.getSex();
+		bloodType = p.getBloodType();
 		
-		quantity = p.getQuantity();
-		bill = p.getbill();
-		medicinePrec = p.getmedicinePrec();
 	}
 	//**********************************************************************************************
 	public String toString() {
-		return name +" "+id+" "+ gender +" "+ appointments+" "+bill+" "+" "+quantity+" "+ medicinePrec;
+		return name +" "+age+" "+ sex +" "+ bloodType;
 	}
 }//endpatient

@@ -16,11 +16,11 @@ class Bill extends JFrame implements ActionListener{
 
 	private Scanner fin;
 	private String employeeName;
-	//declare an array to use it in the JLabel
+	//declare an array to use it in the JLabel   
 	private String [] labelNames =  {"Name", "age", "TypeOfVisit", "Price", "Drugs Purchased", "Selected Quantity", "Total Price"};
 	//Declare the JFrame elements
-	private JLabel jLabels[] = new JLabel[7];
-	private JLabel price = new JLabel("Total Price");
+	private JLabel jLabels[] = new JLabel[7];   
+	private JLabel price = new JLabel("Total Price");   
 	private JLabel vat = new JLabel("VAT");
 	private JLabel priceVat = new JLabel("Total Price with VAT");
 	private JTextArea tprice; //field to show the total price
@@ -100,7 +100,7 @@ class Bill extends JFrame implements ActionListener{
 		
 		p3.add(add);
 	//	p3.add(remove);
-		//p3.add(update);
+	//	p3.add(update);
 		p3.add(purchase);
 		p3.add(cancel);
 		p5.add(p4);
