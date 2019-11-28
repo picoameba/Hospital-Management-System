@@ -11,13 +11,13 @@ import java.util.*;
 
 class RegisterEmployee extends JFrame implements ActionListener{
 
-	private JLabel cashName = new JLabel ("employee Name");
-	private JLabel cashID = new JLabel ("employee ID");
-	private JLabel cashPass = new JLabel ("employee Pass");
+	private JLabel employeeName = new JLabel ("employee Name");
+	private JLabel employeeID = new JLabel ("employee ID");
+	private JLabel employeePass = new JLabel ("employee Pass");
 	private JTextArea []textAreas = new JTextArea[3];
-	private JButton addCash = new JButton ("Add employee");
-	private JButton updateCash = new JButton ("Update employee");
-	private JButton removeCash = new JButton ("Remove employee");
+	private JButton addemployee = new JButton ("Add employee");
+	private JButton updateemployee = new JButton ("Update employee");
+	private JButton removeemployee = new JButton ("Remove employee");
 	private JButton close = new JButton ("Close");
 	private JScrollPane scrollPane; //JScrollPane that will include the textAreas
 	private JPanel p1 = new JPanel(new GridLayout(1,3));
@@ -56,18 +56,18 @@ class RegisterEmployee extends JFrame implements ActionListener{
 			p2.add(textAreas[i]);
 		scrollPane = new JScrollPane(p2);
 
-		p1.add(cashName);
-		p1.add(cashID);
-		p1.add(cashPass);
+		p1.add(employeeName);
+		p1.add(employeeID);
+		p1.add(employeePass);
 		add(scrollPane);
-		p3.add(addCash);
-		p3.add(updateCash);
-		p3.add(removeCash);
+		p3.add(addemployee);
+		p3.add(updateemployee);
+		p3.add(removeemployee);
 		p3.add(close);
 
-		addCash.addActionListener(this);
-		removeCash.addActionListener(this);
-		updateCash.addActionListener(this);
+		addemployee.addActionListener(this);
+		removeemployee.addActionListener(this);
+		updateemployee.addActionListener(this);
 		close.addActionListener(this);
 
 		add(p1, "North");
@@ -87,7 +87,7 @@ class RegisterEmployee extends JFrame implements ActionListener{
 		if (e.getSource() == close) {	//close the frame
 			dispose();
 		}
-		else if(e.getSource() == removeCash) {	//remove a employee
+		else if(e.getSource() == removeemployee) {	//remove a employee
 			String s =  JOptionPane.showInputDialog(null, "Enter The employee ID", "Search employee by ID", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
@@ -122,19 +122,19 @@ class RegisterEmployee extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Invaild ID" , "Error" , JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		else if(e.getSource() == addCash) {//add a employee
+		else if(e.getSource() == addemployee) {//add a employee
 			new AddEmployee(employeesList);
 			dispose();
 		}
-		else if (e.getSource() == updateCash){ //update a employee
+		else if (e.getSource() == updateemployee){ //update a employee
 			String s =  JOptionPane.showInputDialog(null, "Enter The employee ID", "Search employee by ID", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
 				boolean check = false;
-				for (Employee cash: employeesList) {
-					if (cash.getId() == i) {
+				for (Employee employee: employeesList) {
+					if (employee.getId() == i) {
 						dispose();
-						new UpdateEmployee(cash);
+						new UpdateEmployee(employee);
 						check = true;
 					}
 				}

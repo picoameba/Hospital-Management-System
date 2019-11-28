@@ -9,15 +9,15 @@ import java.time.format.*;
 import java.util.*;
 
 
-//frame that will show the employee billing details, and provide the options to add or remove patient, change the quantity,
+//frame that will show the employee billing details, and provagee the options to add or remove patient, change the quantity,
 //and proceed to purchase.
 
-class CheckOut extends JFrame implements ActionListener{
+class Bill extends JFrame implements ActionListener{
 
 	private Scanner fin;
 	private String employeeName;
 	//declare an array to use it in the JLabel
-	private String [] labelNames =  {"Name", "ID", "Size", "Price", "Availble Quantity", "Selected Quantity", "Total Price"};
+	private String [] labelNames =  {"Name", "age", "TypeOfVisit", "Price", "Drugs Purchased", "Selected Quantity", "Total Price"};
 	//Declare the JFrame elements
 	private JLabel jLabels[] = new JLabel[7];
 	private JLabel price = new JLabel("Total Price");
@@ -28,10 +28,10 @@ class CheckOut extends JFrame implements ActionListener{
 	private JTextArea tpriceVat; //field to show the total price with the vat
 	private JTextArea [] a =  new JTextArea[7];
 	private JScrollPane [] sp = new JScrollPane[7]; //JScrollPane to add it to the JTextArea
-	private JButton add = new JButton ("Add new patient");
-	private JButton remove =  new JButton ("Remove patient");
-	private JButton update =  new JButton("Change Quantity");
-	private JButton purchase =  new JButton("Purchase");
+	private JButton add = new JButton ("Add new patient's bill");
+	// private JButton remove =  new JButton ("Remove patient bill");
+//	private JButton update =  new JButton("Change Quantity");
+	private JButton purchase =  new JButton("Generate bill");
 	private JButton cancel =  new JButton("Cancel");
 	private JPanel p1 =  new JPanel(new GridLayout(1,7));
 	private JPanel p2 =  new JPanel(new GridLayout(1,7));
@@ -43,8 +43,8 @@ class CheckOut extends JFrame implements ActionListener{
 	//**********************************************************************************************
 	//constructor
 
-	public CheckOut() throws FileNotFoundException {
-		super ("Check Out"); 
+	public Bill() throws FileNotFoundException {
+		super ("Bill"); 
 		
 		fin =  new Scanner (new FileReader("Temp.txt")); //read from temp.txt file to show the patient information
 		employeeName  = Authenticate.getActiveAccount().getName();
@@ -62,10 +62,10 @@ class CheckOut extends JFrame implements ActionListener{
 		while (fin.hasNext()) {	//adds the data from the file to the appropriate place
 			String name = fin.next();
 			a[0].append(name +"\n");
-			int id =  fin.nextInt();
-			a[1].append(id +"\n");
-			String size =  fin.next();
-			a[2].append(size +"\n");
+			int age =  fin.nextInt();
+			a[1].append(age +"\n");
+			String TypeOfVisit =  fin.next();
+			a[2].append(TypeOfVisit +"\n");
 			double price = fin.nextDouble();
 			a[3].append(price +"\n");
 			int quan =  fin.nextInt();
@@ -99,16 +99,16 @@ class CheckOut extends JFrame implements ActionListener{
 		tpriceVat.setEnabled(false);
 		
 		p3.add(add);
-		p3.add(remove);
-		p3.add(update);
+	//	p3.add(remove);
+		//p3.add(update);
 		p3.add(purchase);
 		p3.add(cancel);
 		p5.add(p4);
 		p5.add(p3);
 		
 		add.addActionListener(this);
-		remove.addActionListener(this);
-		update.addActionListener(this);
+	//	remove.addActionListener(this);
+	//	update.addActionListener(this);
 		purchase.addActionListener(this);
 		cancel.addActionListener(this);
 		
@@ -125,9 +125,9 @@ class CheckOut extends JFrame implements ActionListener{
 	//**********************************************************************************************
 	//method to add patient information to the temp file, to be used when creating the bill
 
-	public void printToTemp(String name, int id, String size, double price, int quant , int selectedQuant) throws FileNotFoundException {
+	public void printToTemp(String name, int age, String TypeOfVisit, double price, int quant , int selectedQuant) throws FileNotFoundException {
 		PrintWriter fout = new PrintWriter(new FileOutputStream(new File("Temp.txt."),true));
-		fout.println(name+" "+id+" "+size+" "+price+" "+quant+" "+selectedQuant);
+		fout.println(name+" "+age+" "+TypeOfVisit+" "+price+" "+quant+" "+selectedQuant);
 		fout.close();
 	}
 
@@ -142,24 +142,26 @@ class CheckOut extends JFrame implements ActionListener{
 		while (fin.hasNextLine()) {//copies the file data to the arrayList
 			Scanner cin = new Scanner(fin.nextLine());
 			String name = cin.next();
-			int id =  cin.nextInt();
-			String catagory = cin.next();
-			String size = cin.next();
+			int age =  cin.nextInt();
+			String sex = cin.next();
+			String TypeOfVisit = cin.next();
 			double price = cin.nextDouble();
 			String picture = cin.next();
+			String bloodType = cin.next();
 			int quant = cin.nextInt();
 			if (cin.hasNext()) 
 				description =  cin.nextLine();
 			else
 				description = "";
-			patients.add(new Patient (name,id,catagory,size,price,picture,quant,description));
+			patients.add(new Patient (name,age,sex,bloodType));
 			cin.close();
 		}
 		
 		fin.close();
-		PrintWriter fout =  new PrintWriter ("patients.txt");
-		for (Patient Pro: patients) //prints arrayList data, correcting the quantity where needed
-			if (Pro.getId() == i) {
+		PrintWriter fout =  new PrintWriter ("patient.txt");
+	}
+	/*	for (Patient Pro: patients) //prints arrayList data, correcting the quantity where needed
+			if (Pro.getAge() == i) {
 				Pro.setQuant(Pro.getQuantity()-quantity);
 				fout.println(Pro);
 			}
@@ -167,6 +169,7 @@ class CheckOut extends JFrame implements ActionListener{
 				fout.println(Pro);
 		fout.close();
 	}
+	*/
 	//**********************************************************************************************
 	//actionListener
 
@@ -181,17 +184,17 @@ class CheckOut extends JFrame implements ActionListener{
 			}
 
 		}
-		else if (e.getSource() == update){ //the actions for the Update Button
-			String s =  JOptionPane.showInputDialog(null, "Enter The patient ID", "Search patient by ID", JOptionPane.QUESTION_MESSAGE);
+	/*	else if (e.getSource() == update){ //the actions for the Update Button
+			String s =  JOptionPane.showInputDialog(null, "Enter The patient age", "Search patient by age", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
 
 				boolean check = false;
 
-				Scanner rid = new Scanner(a[1].getText());
-				while (rid.hasNext()) { //check if the ID exists or not
-					int id = rid.nextInt();
-					if (id == i)
+				Scanner rage = new Scanner(a[1].getText());
+				while (rage.hasNext()) { //check if the age exists or not
+					int age = rage.nextInt();
+					if (age == i)
 						check = true;
 				}
 				if (check) {
@@ -201,36 +204,36 @@ class CheckOut extends JFrame implements ActionListener{
 
 					PrintWriter fout =  new PrintWriter ("Temp.txt");
 					Scanner rname = new Scanner(a[0].getText());
-					rid = new Scanner(a[1].getText());
-					Scanner rsize = new Scanner(a[2].getText());
+					rage = new Scanner(a[1].getText());
+					Scanner rTypeOfVisit = new Scanner(a[2].getText());
 					Scanner rprice = new Scanner(a[3].getText());
 					Scanner rquant1 = new Scanner(a[4].getText());
 					Scanner rquant2 = new Scanner(a[5].getText());
 
 					while (rname.hasNext()) {
 						String name = rname.next();
-						int id = rid.nextInt();
-						String size = rsize.next();
+						int age = rage.nextInt();
+						String TypeOfVisit = rTypeOfVisit.next();
 						double price = rprice.nextDouble();
 						int quant1 = rquant1.nextInt();
 						int quant2 = rquant2.nextInt();
 
-						if (id == i) {
+						if (age == i) {
 							if (newquant > 0 && newquant <= quant1 && newquant != 0) {
-								fout.println(name+" "+id+" "+size+" "+price+" "+quant1+" "+newquant);
+								fout.println(name+" "+age+" "+TypeOfVisit+" "+price+" "+quant1+" "+newquant);
 							}
 							else {
 								JOptionPane.showMessageDialog(null, "The Quantity is not correct!!" , "Invaild Quantity" , JOptionPane.ERROR_MESSAGE);
-								fout.println(name+" "+id+" "+size+" "+price+" "+quant1+" "+quant2);
+								fout.println(name+" "+age+" "+TypeOfVisit+" "+price+" "+quant1+" "+quant2);
 							}
 						}
 						else {
-							fout.println(name+" "+id+" "+size+" "+price+" "+quant1+" "+quant2);
+							fout.println(name+" "+age+" "+TypeOfVisit+" "+price+" "+quant1+" "+quant2);
 						}
 					}
 					rname.close();
-					rid.close();
-					rsize.close();
+					rage.close();
+					rTypeOfVisit.close();
 					rprice.close();
 					rquant1.close();
 					rquant2.close();
@@ -239,7 +242,7 @@ class CheckOut extends JFrame implements ActionListener{
 					new CheckOut();
 				}
 				else
-					JOptionPane.showMessageDialog(null, "The ID is not correct!!" , "Invaild ID" , JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "The age is not correct!!" , "Invaild age" , JOptionPane.ERROR_MESSAGE);
 
 			} catch(Exception e1) {
 				e1.printStackTrace();
@@ -247,37 +250,38 @@ class CheckOut extends JFrame implements ActionListener{
 			}
 
 
-		}
-		else if (e.getSource() == remove){ //the actions for the remove Button
-			String s =  JOptionPane.showInputDialog(null, "Enter The patient ID", "Search patient by ID", JOptionPane.QUESTION_MESSAGE);
+		} 
+		*/
+	/*	else if (e.getSource() == remove){ //the actions for the remove Button
+			String s =  JOptionPane.showInputDialog(null, "Enter The patient age", "Search patient by age", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
 				PrintWriter fout =  new PrintWriter ("Temp.txt");
 				boolean check = false;
 				
 				Scanner rname = new Scanner(a[0].getText());
-				Scanner rid = new Scanner(a[1].getText());
-				Scanner rsize = new Scanner(a[2].getText());
+				Scanner rage = new Scanner(a[1].getText());
+				Scanner rTypeOfVisit = new Scanner(a[2].getText());
 				Scanner rprice = new Scanner(a[3].getText());
 				Scanner rquant1 = new Scanner(a[4].getText());
 				Scanner rquant2 = new Scanner(a[5].getText());
 
-				while (rname.hasNext()) { //check if the ID entered is correct or not, if yes it will print all the elements except the entered ID
+				while (rname.hasNext()) { //check if the age entered is correct or not, if yes it will print all the elements except the entered age
 					String name = rname.next();
-					int id = rid.nextInt();
-					String size = rsize.next();
+					int age = rage.nextInt();
+					String TypeOfVisit = rTypeOfVisit.next();
 					double price = rprice.nextDouble();
 					int quant1 = rquant1.nextInt();
 					int quant2 = rquant2.nextInt();
-					if (id == i)
+					if (age == i)
 						check = true;
 					else
-						fout.println(name+" "+id+" "+size+" "+price+" "+quant1+" "+quant2);
+						fout.println(name+" "+age+" "+TypeOfVisit+" "+price+" "+quant1+" "+quant2);
 				}
 				
 				rname.close();
-				rid.close();
-				rsize.close();
+				rage.close();
+				rTypeOfVisit.close();
 				rprice.close();
 				rquant1.close();
 				rquant2.close();
@@ -289,7 +293,7 @@ class CheckOut extends JFrame implements ActionListener{
 					new CheckOut();
 				}
 				else
-					JOptionPane.showMessageDialog(null, "The ID is not correct!!" , "Invaild ID" , JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "The age is not correct!!" , "Invaild age" , JOptionPane.ERROR_MESSAGE);
 
 			}
 			catch(IOException e1) {
@@ -300,7 +304,8 @@ class CheckOut extends JFrame implements ActionListener{
 				e1.printStackTrace();
 				JOptionPane.showMessageDialog(null, "Invaild Input" , "Error" , JOptionPane.ERROR_MESSAGE);
 			}
-		}
+		} stop comment
+		*/
 		else if (e.getSource() == purchase) { //the actions for the purchase Button
 			PrintWriter fout;
 			try {
@@ -308,23 +313,23 @@ class CheckOut extends JFrame implements ActionListener{
 				fout.println("Purchased patients:");
 				
 				Scanner rname = new Scanner(a[0].getText());
-				Scanner rid = new Scanner(a[1].getText());
-				Scanner rsize = new Scanner(a[2].getText());
+				Scanner rage = new Scanner(a[1].getText());
+				Scanner rTypeOfVisit = new Scanner(a[2].getText());
 				Scanner rprice = new Scanner(a[3].getText());
 				Scanner rquant1 = new Scanner(a[4].getText());
 				Scanner rquant2 = new Scanner(a[5].getText());
 				Scanner rtotalprice = new Scanner(a[6].getText());
 				
-				while (rname.hasNext()) { //check if the ID entered is correct or not, if yes it will print all the elements except the entered ID
+				while (rname.hasNext()) { //check if the age entered is correct or not, if yes it will print all the elements except the entered age
 					String name = rname.next();
-					int id = rid.nextInt();
-					String size = rsize.next();
+					int age = rage.nextInt();
+					String TypeOfVisit = rTypeOfVisit.next();
 					double price = rprice.nextDouble();
 					int quant1 = rquant1.nextInt();
 					int quant2 = rquant2.nextInt();
 					double totalprice = rtotalprice.nextDouble();
-					printToFile(id,quant2);
-					fout.println("Name: "+name+", ID: "+id+", Size: "+size+", Quantity: "+quant2+", Total Price: "+totalprice);				
+					printToFile(age,quant2);
+					fout.println("Name: "+name+", age: "+age+", TypeOfVisit: "+TypeOfVisit+", Quantity: "+quant2+", Total Price: "+totalprice);				
 				}
 
 				DateTimeFormatter dtf =  DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -338,8 +343,8 @@ class CheckOut extends JFrame implements ActionListener{
 
 
 				rname.close();
-				rid.close();
-				rsize.close();
+				rage.close();
+				rTypeOfVisit.close();
 				rprice.close();
 				rquant1.close();
 				rquant2.close();
