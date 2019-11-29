@@ -12,8 +12,7 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-<<<<<<< HEAD
-*/
+
 public class Patient{
 //Variables
 private String firstName, lastName, id, email, gender, bloodType, mobileNumber, telephone, insuranceType;
@@ -170,17 +169,6 @@ public void Patient_History_Writer(HistoryHolder h) {
 		e.printStackTrace();
 	}
 }
-public void Send_email(String ID) {
-	//Sending the appointment email
-	String recipient = "None";
-    String sender = "KU_Hospital@ku.ac.ae";
-    String host = "localhost";
-    String pFname,docID, docFname, docLname, dept, time, date;
-    Properties properties = System.getProperties();
-    properties.setProperty("mail.smtp.host", host);
-    Session session = Session.getDefaultInstance(properties);
-=======
->>>>>>> branch 'master' of https://github.com/picoameba/Hospital-Management-System
 
 public class Patient {
 	//Variables
@@ -405,7 +393,7 @@ public class Patient {
             doc.close();
             //Sending the message
             Transport.send(message);
-<<<<<<< HEAD
+
         }
 */
     } 
@@ -421,8 +409,8 @@ public class Patient {
         e.printStackTrace();
     }
 }
-=======
-        } */
+
+        } 
 
 
 		catch(FileNotFoundException c) {
@@ -435,7 +423,7 @@ public class Patient {
 
 
 
->>>>>>> branch 'master' of https://github.com/picoameba/Hospital-Management-System
+
 
 }
 
