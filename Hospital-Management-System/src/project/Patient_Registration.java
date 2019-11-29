@@ -18,12 +18,14 @@ import javax.swing.JOptionPane;
  *
  * @author jeffe
  */
-public class Patient_Registration extends javax.swing.JFrame implements PrintToFile {
+public class Patient_Registration extends javax.swing.JFrame implements PrintToFile{
 
     /**
      * Creates new form Patient_Registration
      */
 	
+	
+public String ID (Patient Loader_Patient)
 	int lastpatient = patient.size() - 1;
 	int newId = patient.get(lastpatient).getId() + 1;
 	tid.setText(Integer.toString(newId));
@@ -141,6 +143,9 @@ public class Patient_Registration extends javax.swing.JFrame implements PrintToF
         				int age =  Integer.parseInt(jTextField2.getText());
         				String sex = jRadioButton1.getText();
         				String bloodType =(String) jComboBox2.getSelectedItem();
+        				 String firstName, lastName, id, email, gender,  mobileNumber, telephone, insuranceType;
+      
+        				 double weight, height;
         				
         				if (age <=  0){ //check if the age  is negative 
         					JOptionPane.showMessageDialog(null, "Please enter Positive age" , "Invaild age" , JOptionPane.ERROR_MESSAGE);
@@ -149,7 +154,8 @@ public class Patient_Registration extends javax.swing.JFrame implements PrintToF
         					JOptionPane.showMessageDialog(null, "Please fill Name,Catagory,Size and Picture" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
         				} */
         				else {
-        					Patient pro = new Patient(name,age,sex,bloodType);
+     
+							Patient pro = new Patient(id, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height);
         					printToFile(pro);
         					JOptionPane.showMessageDialog(null, "patient List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
         					dispose();
