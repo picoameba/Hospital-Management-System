@@ -25,10 +25,10 @@ public class Patient_Registration extends javax.swing.JFrame implements PrintToF
      */
 	
 	
-public String ID (Patient Loader_Patient)
+/* public String ID (Patient Loader_Patient)
 	int lastpatient = patient.size() - 1;
 	int newId = patient.get(lastpatient).getId() + 1;
-	tid.setText(Integer.toString(newId));
+	tid.setText(Integer.toString(newId)); */
 	
 	
 	//method that adds a patient to the file
@@ -155,8 +155,8 @@ public String ID (Patient Loader_Patient)
         				} */
         				else {
      
-							Patient pro = new Patient(id, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height);
-        					printToFile(pro);
+						//	Patient pro = new Patient(ID, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height);
+        				//	printToFile(pro);
         					JOptionPane.showMessageDialog(null, "patient List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
         					dispose();
         					new CheckPatient();

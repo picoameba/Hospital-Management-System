@@ -30,6 +30,7 @@ class SelectPatient extends JFrame implements ActionListener {
 
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
+			String ID=cin.next();
 			String firstName = cin.next();
 			String lastName = cin.next();
 			String email = cin.next();
@@ -41,8 +42,8 @@ class SelectPatient extends JFrame implements ActionListener {
 			String telephone = cin.next();
 			String insuranceType = cin.next();
 			double weight =  cin.nextDouble();
-		
-			patientsList.add(new Patient (id, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height));
+			double height =  cin.nextDouble();
+			patientsList.add(new Patient (ID, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height));
 			cin.close();
 		}
 		
@@ -80,16 +81,16 @@ class SelectPatient extends JFrame implements ActionListener {
 	//**********************************************************************************************
 	//method that extracts the list of firstNames from a certain category in the file
 
-	public static ArrayList<String> makefirstNameList(String catSelect, ArrayList<Patient> patientList) {
+	/* public static ArrayList<String> makefirstNameList(String catSelect, ArrayList<Patient> patientList) {
 		//declare arraylist of type string
 		ArrayList<String> firstNameList = new ArrayList<>();
 		for(Patient p : patientList) {
-			if(!firstNameList.contains(p.getfirstName()) /*&& p.getSex().contains(catSelect)*/) {
+			if(!firstNameList.contains(p.getfirstName()) /*&& p.getSex().contains(catSelect)) {
 				firstNameList.add(p.getfirstName());
 			}
 		}
-		return firstNameList;
-	}
+		return firstNameList; 
+	} */
 
 	//**********************************************************************************************
 	//method that extracts the available sexs of a certain patient in the file
@@ -136,7 +137,7 @@ class SelectPatient extends JFrame implements ActionListener {
 				if (!checkExists(i)) {
 					for (Patient p: patientsList) {
 						if (p.getAge() == i) {
-							selectedpatient.makeCopy(p);
+					//		selectedpatient.makeCopy(p);
 							check = true;
 							dispose();
 							new BookAppointment(selectedpatient);

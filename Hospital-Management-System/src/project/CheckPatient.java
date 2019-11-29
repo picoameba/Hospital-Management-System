@@ -62,7 +62,7 @@ class CheckPatient extends JFrame implements ActionListener{
 			String bloodType = cin.next();
 			
 			
-			patientsList.add(new Patient (name,age,sex,bloodType));
+		//	patientsList.add(new Patient (name,age,sex,bloodType));
 			cin.close();
 		}
 		fin.close();
@@ -77,9 +77,9 @@ class CheckPatient extends JFrame implements ActionListener{
 
 
 		for (Patient p: patientsList) { // add all the patients elements to the JTextArea to  manage the patients by the admin
-			a[0].append(p.getName()+"\n");
+		//	a[0].append(p.getName()+"\n");
 			a[1].append(p.getAge()+"\n");
-			a[2].append(p.getSex()+"\n");
+		//	a[2].append(p.getSex()+"\n");
 			a[3].append(p.getBloodType()+"\n");
 		
 		}

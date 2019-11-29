@@ -4,7 +4,7 @@ Total Amount:
 VAT:  
 Total Amount with the VAT:  
 
-Bill Date and Time: 2019/11/27 19:59:10
+Bill Date and Time: 2019/11/29 13:23:35
 
 employee Name: ahmad
 
