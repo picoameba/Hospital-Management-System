@@ -151,9 +151,9 @@ class Bill extends JFrame implements ActionListener{
 			int quant = cin.nextInt();
 			if (cin.hasNext()) 
 				description =  cin.nextLine();
-			else
-				description = "";
-			patients.add(new Patient (name,age,sex,bloodType));
+	/*		else
+				description = ""; 
+			patients.add(new Patient (name,age,sex,bloodType)); */
 			cin.close();
 		}
 		

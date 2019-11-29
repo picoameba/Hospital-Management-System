@@ -7,12 +7,12 @@ import java.io.*;
 import java.util.*;
 
 //class of the frame that provides the options to select the patients,
-//either by ID or by the category then the name then the sex
+//either by ID or by the category then the firstName then the sex
 
 class SelectPatient extends JFrame implements ActionListener {
 	
 	private JButton id = new JButton("Choose patient By ID");
-	private JButton select = new JButton("Choose patient By name");
+	private JButton select = new JButton("Choose patient By firstName");
 	private JButton close = new JButton("Close");
 	private Scanner fin;
 	private ArrayList<Patient> patientsList; // declare arraylist for the patients
@@ -30,13 +30,20 @@ class SelectPatient extends JFrame implements ActionListener {
 
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
-			String name = cin.next();
+			String ID=cin.next();
+			String firstName = cin.next();
+			String lastName = cin.next();
+			String email = cin.next();
+			String gender = cin.next();
 			int age =  cin.nextInt();
+			String mobileNumber = cin.next();
 			String sex = cin.next();
 			String bloodType = cin.next();
-			
-		
-			patientsList.add(new Patient (name,age,sex,bloodType));
+			String telephone = cin.next();
+			String insuranceType = cin.next();
+			double weight =  cin.nextDouble();
+			double height =  cin.nextDouble();
+			patientsList.add(new Patient (ID, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height));
 			cin.close();
 		}
 		
@@ -72,27 +79,27 @@ class SelectPatient extends JFrame implements ActionListener {
 	}
 
 	//**********************************************************************************************
-	//method that extracts the list of names from a certain category in the file
+	//method that extracts the list of firstNames from a certain category in the file
 
-	public static ArrayList<String> makeNameList(String catSelect, ArrayList<Patient> patientList) {
+	/* public static ArrayList<String> makefirstNameList(String catSelect, ArrayList<Patient> patientList) {
 		//declare arraylist of type string
-		ArrayList<String> nameList = new ArrayList<>();
+		ArrayList<String> firstNameList = new ArrayList<>();
 		for(Patient p : patientList) {
-			if(!nameList.contains(p.getName()) /*&& p.getSex().contains(catSelect)*/) {
-				nameList.add(p.getName());
+			if(!firstNameList.contains(p.getfirstName()) /*&& p.getSex().contains(catSelect)) {
+				firstNameList.add(p.getfirstName());
 			}
 		}
-		return nameList;
-	}
+		return firstNameList; 
+	} */
 
 	//**********************************************************************************************
 	//method that extracts the available sexs of a certain patient in the file
 
-	public static ArrayList<String> makesexList(String nameSelect, String catSelect, ArrayList<Patient> patientList) {
+	public static ArrayList<String> makesexList(String firstNameSelect, String catSelect, ArrayList<Patient> patientList) {
 		//declare arraylist of type string
 		ArrayList<String> sexList = new ArrayList<>();
 		for(Patient p : patientList) {
-	/*		if(!sexList.contains(p.getName())  && p.getSex().contains(catSelect) && p.getName().contains(nameSelect)) {
+	/*		if(!sexList.contains(p.getfirstName())  && p.getSex().contains(catSelect) && p.getfirstName().contains(firstNameSelect)) {
 				sexList.add(p.getsex());
 			} */
 		}
@@ -106,7 +113,7 @@ class SelectPatient extends JFrame implements ActionListener {
 		int id;
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
-			cin.next();	//to skip the name, as it won't be used
+			cin.next();	//to skip the firstName, as it won't be used
 			id =  cin.nextInt();
 			cin.close();
 			if (id ==  i)
@@ -130,7 +137,7 @@ class SelectPatient extends JFrame implements ActionListener {
 				if (!checkExists(i)) {
 					for (Patient p: patientsList) {
 						if (p.getAge() == i) {
-							selectedpatient.makeCopy(p);
+					//		selectedpatient.makeCopy(p);
 							check = true;
 							dispose();
 							new BookAppointment(selectedpatient);
@@ -157,20 +164,20 @@ class SelectPatient extends JFrame implements ActionListener {
 			}
 		}
 		/*
-		else { //actions for the category Button which will search the patient by  name then sex
+		else { //actions for the category Button which will search the patient by  firstName then sex
 
 			String [] catList =  makeCategoryList(patientsList).toArray(new String[makeCategoryList(patientsList).sexList()]);
 			String catSelect = (String)JOptionPane.showInputDialog(null, "Select the patient Sex","Search Sex"
 					,JOptionPane.QUESTION_MESSAGE,null,catList,catList[0]);	
-			String [] nameList =  makeNameList(catSelect,patientsList).toArray(new String[makeNameList(catSelect,patientsList).sex()]);
-			String nameSelect = (String)JOptionPane.showInputDialog(null, "Select the patient name","Search Name"
-					,JOptionPane.QUESTION_MESSAGE,null,nameList,nameList[0]);
-			String [] sexList =  makesexList(nameSelect,catSelect,patientsList).toArray(new String[makesexList(nameSelect,catSelect,patientsList).sex()]);
+			String [] firstNameList =  makefirstNameList(catSelect,patientsList).toArray(new String[makefirstNameList(catSelect,patientsList).sex()]);
+			String firstNameSelect = (String)JOptionPane.showInputDialog(null, "Select the patient firstName","Search firstName"
+					,JOptionPane.QUESTION_MESSAGE,null,firstNameList,firstNameList[0]);
+			String [] sexList =  makesexList(firstNameSelect,catSelect,patientsList).toArray(new String[makesexList(firstNameSelect,catSelect,patientsList).sex()]);
 			String sexSelect = (String)JOptionPane.showInputDialog(null, "Select the patient sex","Search sex"
 					,JOptionPane.QUESTION_MESSAGE,null,sexList,sexList[0]);
 			selectedpatient =  new Patient();
 			for (Patient p: patientsList) {
-				if (p.getSex().contains(catSelect) && p.getName().contains(nameSelect)&& p.getSex().contains(sexSelect)) 
+				if (p.getSex().contains(catSelect) && p.getfirstName().contains(firstNameSelect)&& p.getSex().contains(sexSelect)) 
 					selectedpatient.makeCopy(p);
 			} 
 			*/

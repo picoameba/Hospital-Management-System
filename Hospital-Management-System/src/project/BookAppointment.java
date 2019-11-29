@@ -28,7 +28,7 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 
 	public BookAppointment(Patient P) { // a frame which takes patients as a parameter
 		super("patient details"); //the title of the frame and the layout is the default Border Layout
-		selectedpatient.makeCopy(P); //Make a copy of the parameter patient to use it in the actionPerformed method
+	//	selectedpatient.makeCopy(P); //Make a copy of the parameter patient to use it in the actionPerformed method
 		details.setEditable(false); //disable the edit text for the patient details
 		image = new JLabel("No Image Available");
 		
@@ -42,8 +42,8 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 		p2.add(confirm);
 
 		//Print the patient information to check if it is the correct patient
-		details.append("Name:"+selectedpatient.getName()+"\nAge:"+selectedpatient.getAge()+"\nSex:"+selectedpatient.getSex()+"\nBloodType:"+selectedpatient.getBloodType()
-		);
+//		details.append("Name:"+selectedpatient.getName()+"\nAge:"+selectedpatient.getAge()+"\nSex:"+selectedpatient.getSex()+"\nBloodType:"+selectedpatient.getBloodType()
+	//	);
 
 		//add the ActionListener to the JButtons
 		cancel.addActionListener(this);
@@ -135,7 +135,7 @@ class BookAppointment extends JFrame implements ActionListener, PrintToFile {
 				description =  cin.nextLine();
 			else
 				description = "";
-			patients.add(new Patient (name,age,sex,bloodType));
+		//	patients.add(new Patient (id, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height));
 			cin.close();
 		}
 		fin.close();
