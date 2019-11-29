@@ -2,7 +2,7 @@ package project;
 
 import javax.swing.*;
 
-import project.AddPatient;
+
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +14,7 @@ import java.util.*;
 class CheckPatient extends JFrame implements ActionListener{
 	
 	//declare an array to use it in the JLabel
-	private String [] labelNames =  {"Name","ID", "Catagory", "Size" , "Price", "Quantity" , "Description"};
+	private String [] labelNames =  {"Name","age", "sex", "bloodType"};
 	//Declare the JFrame elements
 	private JLabel j[] = new JLabel[7];
 	private JTextArea [] a =  new JTextArea[7];
@@ -23,8 +23,8 @@ class CheckPatient extends JFrame implements ActionListener{
 	private JButton remove =  new JButton ("Remove patient");
 	private JButton update =  new JButton("Update patient");
 	private JButton close =  new JButton("Close");
-	private JPanel p1 =  new JPanel(new GridLayout(1,7));
-	private JPanel p2 =  new JPanel(new GridLayout(1,7));
+	private JPanel p1 =  new JPanel(new GridLayout(1,4));
+	private JPanel p2 =  new JPanel(new GridLayout(1,4));
 	private JPanel p3 =  new JPanel(new GridLayout(1,4));
 	//Declare patient arraylist
 	private ArrayList<Patient> patientsList;
@@ -51,47 +51,40 @@ class CheckPatient extends JFrame implements ActionListener{
 		p2.add(horizontal);
 		scrollPane = new JScrollPane(p2);
 		//read a file ("patients.txt") and save the it to arraylist patients
-		Scanner fin =  new Scanner (new FileReader("patients.txt"));
+		Scanner fin =  new Scanner (new FileReader("patient.txt"));
 		patientsList = new ArrayList<>();
-		String description;
+		
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
 			String name = cin.next();
-			int id =  cin.nextInt();
-			String catagory = cin.next();
-			String size = cin.next();
-			double price = cin.nextDouble();
-			String picture = cin.next();
-			int quant = cin.nextInt();
-			if (cin.hasNext()) 
-				description =  cin.nextLine();
-			else
-				description = "";
-			patientsList.add(new Patient (name,id,catagory,size,price,picture,quant,description));
+			int age =  cin.nextInt();
+			String sex = cin.next();
+			String bloodType = cin.next();
+			
+			
+		//	patientsList.add(new Patient (name,age,sex,bloodType));
 			cin.close();
 		}
 		fin.close();
 
-		//sort the patients list by id
+		//sort the patients list by age
 		Collections.sort(patientsList, new Comparator<Patient>() {
 			public int compare (Patient o1, Patient o2) {
-				int comp = o1.getId() - o2.getId();
+				int comp = o1.getAge() - o2.getAge();
 				return comp;
 			}
 		});
 
 
 		for (Patient p: patientsList) { // add all the patients elements to the JTextArea to  manage the patients by the admin
-			a[0].append(p.getName()+"\n");
-			a[1].append(p.getId()+"\n");
-			a[2].append(p.getCatagory()+"\n");
-			a[3].append(p.getSize()+"\n");
-			a[4].append(p.getPrice()+"\n");
-			a[5].append(p.getQuantity()+"\n");
-			a[6].append(p.getDescription()+"\n");
+		//	a[0].append(p.getName()+"\n");
+			a[1].append(p.getAge()+"\n");
+		//	a[2].append(p.getSex()+"\n");
+			a[3].append(p.getBloodType()+"\n");
+		
 		}
 		
-		for (int i = 0; i < 7; i++) { //set the text to start from the top, useful when the text area is too large
+		for (int i = 0; i < 4; i++) { //set the text to start from the top, useful when the text area is too large
 			a[i].setSelectionStart(0);
 			a[i].setSelectionEnd(0);
 		}
@@ -108,7 +101,7 @@ class CheckPatient extends JFrame implements ActionListener{
 		add(scrollPane);
 		add(p3,"South");
 		setVisible(true);
-		setSize(800,800);
+		setSize(600,600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBackground(Color.YELLOW);
 		
@@ -120,19 +113,19 @@ class CheckPatient extends JFrame implements ActionListener{
 
 	public void actionPerformed (ActionEvent e) {
 		if (e.getSource() == add) { //the actions for the Add Button
-			new AddPatient();
+			new Patient_Registration().setVisible(true);
 			dispose();
 		}
 		else if(e.getSource() == remove) {
-			//ask the admin to enter the ID of the patient to remove it from the list
-			String s =  JOptionPane.showInputDialog(null, "Enter The patient ID", "Search patient by ID", JOptionPane.QUESTION_MESSAGE);
+			//ask the admin to enter the age of the patient to remove it from the list
+			String s =  JOptionPane.showInputDialog(null, "Enter The patient age", "Search patient by age", JOptionPane.QUESTION_MESSAGE);
 			int i;
 			try {
 				i = Integer.parseInt(s);
-				PrintWriter fout =  new PrintWriter("patients.txt");
+				PrintWriter fout =  new PrintWriter("patient.txt");
 				boolean check = false;
 				for (Patient Pro: patientsList) 
-					if (Pro.getId() == i)
+					if (Pro.getAge() == i)
 						check = true;
 					else
 						fout.println(Pro);
@@ -143,7 +136,7 @@ class CheckPatient extends JFrame implements ActionListener{
 					new CheckPatient();
 				}
 				else
-					JOptionPane.showMessageDialog(null, "The patient ID was not found" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "The patient age was not found" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
 
 			} 
 			catch (FileNotFoundException e1) {
@@ -156,20 +149,20 @@ class CheckPatient extends JFrame implements ActionListener{
 			}
 		}
 		else if (e.getSource() == update){ //the update for the Add Button
-			//asking the admin to enter the ID to update its information
-			String s =  JOptionPane.showInputDialog(null, "Enter The patient ID", "Search patient by ID", JOptionPane.QUESTION_MESSAGE);
+			//asking the admin to enter the age to update its information
+			String s =  JOptionPane.showInputDialog(null, "Enter The patient age", "Search patient by age", JOptionPane.QUESTION_MESSAGE);
 			try {
 				int i = Integer.parseInt(s);
 				boolean check = false;
 				for (Patient Pro: patientsList) {
-					if (Pro.getId() == i) {
+					if (Pro.getAge() == i) {
 						dispose();
-						new UpdatePatient(Pro);
+						new Patient_Registration().setVisible(true);;
 						check = true;
 					}
 				}
 				if (!check)
-					JOptionPane.showMessageDialog(null, "The patient ID is not correct" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "The patient age is not correct" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
 
 			}catch (Exception e1){
 				e1.printStackTrace();
@@ -182,5 +175,7 @@ class CheckPatient extends JFrame implements ActionListener{
 		}
 	}
 }
+
+
 
 

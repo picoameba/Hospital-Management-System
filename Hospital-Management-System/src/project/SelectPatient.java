@@ -7,12 +7,12 @@ import java.io.*;
 import java.util.*;
 
 //class of the frame that provides the options to select the patients,
-//either by ID or by the category then the name then the size
+//either by ID or by the category then the firstName then the sex
 
 class SelectPatient extends JFrame implements ActionListener {
 	
 	private JButton id = new JButton("Choose patient By ID");
-	private JButton select = new JButton("Choose patient By Category");
+	private JButton select = new JButton("Choose patient By firstName");
 	private JButton close = new JButton("Close");
 	private Scanner fin;
 	private ArrayList<Patient> patientsList; // declare arraylist for the patients
@@ -24,24 +24,26 @@ class SelectPatient extends JFrame implements ActionListener {
 	public SelectPatient() throws FileNotFoundException {
 		super("Choose patient"); //the title of the JFrame
 
-		fin = new Scanner(new FileReader("patients.txt"));
+		fin = new Scanner(new FileReader("patient.txt"));
 		patientsList = new ArrayList<>();
 		String description;
 
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
-			String name = cin.next();
-			int id =  cin.nextInt();
-			String catagory = cin.next();
-			String size = cin.next();
-			double price = cin.nextDouble();
-			String picture = cin.next();
-			int quant = cin.nextInt();
-			if (cin.hasNext()) 
-				description =  cin.nextLine();
-			else
-				description = "";
-			patientsList.add(new Patient (name,id,catagory,size,price,picture,quant,description));
+			String ID=cin.next();
+			String firstName = cin.next();
+			String lastName = cin.next();
+			String email = cin.next();
+			String gender = cin.next();
+			int age =  cin.nextInt();
+			String mobileNumber = cin.next();
+			String sex = cin.next();
+			String bloodType = cin.next();
+			String telephone = cin.next();
+			String insuranceType = cin.next();
+			double weight =  cin.nextDouble();
+			double height =  cin.nextDouble();
+			patientsList.add(new Patient (ID, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height));
 			cin.close();
 		}
 		
@@ -59,7 +61,7 @@ class SelectPatient extends JFrame implements ActionListener {
 		close.addActionListener(this);
 		
 		setVisible(true);
-		setSize(500,400); //setting the size
+		setSize(500,400); //setting the sex
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBackground(Color.RED);
 	}
@@ -69,41 +71,39 @@ class SelectPatient extends JFrame implements ActionListener {
 
 	public static ArrayList<String> makeCategoryList(ArrayList<Patient> patientList) {
 		//declare arraylist of type string
-		ArrayList<String> categoryList = new ArrayList<>();
+		ArrayList<String> sexList = new ArrayList<>();
 		for(Patient p : patientList) {
-			if(!categoryList.contains(p.getCatagory())) {
-				categoryList.add(p.getCatagory());
-			}
+			
 		}
-		return categoryList;
+		return sexList;
 	}
 
 	//**********************************************************************************************
-	//method that extracts the list of names from a certain category in the file
+	//method that extracts the list of firstNames from a certain category in the file
 
-	public static ArrayList<String> makeNameList(String catSelect, ArrayList<Patient> patientList) {
+	/* public static ArrayList<String> makefirstNameList(String catSelect, ArrayList<Patient> patientList) {
 		//declare arraylist of type string
-		ArrayList<String> nameList = new ArrayList<>();
+		ArrayList<String> firstNameList = new ArrayList<>();
 		for(Patient p : patientList) {
-			if(!nameList.contains(p.getName()) && p.getCatagory().contains(catSelect)) {
-				nameList.add(p.getName());
+			if(!firstNameList.contains(p.getfirstName()) /*&& p.getSex().contains(catSelect)) {
+				firstNameList.add(p.getfirstName());
 			}
 		}
-		return nameList;
-	}
+		return firstNameList; 
+	} */
 
 	//**********************************************************************************************
-	//method that extracts the available sizes of a certain patient in the file
+	//method that extracts the available sexs of a certain patient in the file
 
-	public static ArrayList<String> makeSizeList(String nameSelect, String catSelect, ArrayList<Patient> patientList) {
+	public static ArrayList<String> makesexList(String firstNameSelect, String catSelect, ArrayList<Patient> patientList) {
 		//declare arraylist of type string
-		ArrayList<String> sizeList = new ArrayList<>();
+		ArrayList<String> sexList = new ArrayList<>();
 		for(Patient p : patientList) {
-			if(!sizeList.contains(p.getName()) && p.getCatagory().contains(catSelect) && p.getName().contains(nameSelect)) {
-				sizeList.add(p.getSize());
-			}
+	/*		if(!sexList.contains(p.getfirstName())  && p.getSex().contains(catSelect) && p.getfirstName().contains(firstNameSelect)) {
+				sexList.add(p.getsex());
+			} */
 		}
-		return sizeList;
+		return sexList;
 	}
 	//**********************************************************************************************
 	//method that checks if a patient id exists
@@ -113,7 +113,7 @@ class SelectPatient extends JFrame implements ActionListener {
 		int id;
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
-			cin.next();	//to skip the name, as it won't be used
+			cin.next();	//to skip the firstName, as it won't be used
 			id =  cin.nextInt();
 			cin.close();
 			if (id ==  i)
@@ -122,6 +122,7 @@ class SelectPatient extends JFrame implements ActionListener {
 		fin.close();
 		return false;
 	}
+	
 
 	//**********************************************************************************************
 	//actionLister
@@ -135,8 +136,8 @@ class SelectPatient extends JFrame implements ActionListener {
 				boolean check = false;
 				if (!checkExists(i)) {
 					for (Patient p: patientsList) {
-						if (p.getId() == i) {
-							selectedpatient.makeCopy(p);
+						if (p.getAge() == i) {
+					//		selectedpatient.makeCopy(p);
 							check = true;
 							dispose();
 							new BookAppointment(selectedpatient);
@@ -146,7 +147,7 @@ class SelectPatient extends JFrame implements ActionListener {
 						JOptionPane.showMessageDialog(null, "Enter a vaild ID" , "Invaild ID" , JOptionPane.ERROR_MESSAGE);
 				}
 				else
-					JOptionPane.showMessageDialog(null, "You have this Item already!!" , "Item Exsists" , JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Patient alreadt exist!!" , "patient Exsists" , JOptionPane.ERROR_MESSAGE);
 
 			}catch(Exception e2) {
 				e2.printStackTrace();
@@ -156,31 +157,32 @@ class SelectPatient extends JFrame implements ActionListener {
 		else if (e.getSource() == close) { // actions for the close Button
 			dispose();
 			try {
-				new CheckOut();
+				new Bill();
 			} catch (FileNotFoundException e1) {
-				JOptionPane.showMessageDialog(null, "patients File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "patient File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 				e1.printStackTrace();
 			}
 		}
-		else { //actions for the category Button which will search the patient by category then name then size
+		/*
+		else { //actions for the category Button which will search the patient by  firstName then sex
 
-			String [] catList =  makeCategoryList(patientsList).toArray(new String[makeCategoryList(patientsList).size()]);
-			String catSelect = (String)JOptionPane.showInputDialog(null, "Select the patient catagory","Search Catagory"
+			String [] catList =  makeCategoryList(patientsList).toArray(new String[makeCategoryList(patientsList).sexList()]);
+			String catSelect = (String)JOptionPane.showInputDialog(null, "Select the patient Sex","Search Sex"
 					,JOptionPane.QUESTION_MESSAGE,null,catList,catList[0]);	
-			String [] nameList =  makeNameList(catSelect,patientsList).toArray(new String[makeNameList(catSelect,patientsList).size()]);
-			String nameSelect = (String)JOptionPane.showInputDialog(null, "Select the patient name","Search Name"
-					,JOptionPane.QUESTION_MESSAGE,null,nameList,nameList[0]);
-			String [] sizeList =  makeSizeList(nameSelect,catSelect,patientsList).toArray(new String[makeSizeList(nameSelect,catSelect,patientsList).size()]);
-			String sizeSelect = (String)JOptionPane.showInputDialog(null, "Select the patient size","Search Size"
-					,JOptionPane.QUESTION_MESSAGE,null,sizeList,sizeList[0]);
+			String [] firstNameList =  makefirstNameList(catSelect,patientsList).toArray(new String[makefirstNameList(catSelect,patientsList).sex()]);
+			String firstNameSelect = (String)JOptionPane.showInputDialog(null, "Select the patient firstName","Search firstName"
+					,JOptionPane.QUESTION_MESSAGE,null,firstNameList,firstNameList[0]);
+			String [] sexList =  makesexList(firstNameSelect,catSelect,patientsList).toArray(new String[makesexList(firstNameSelect,catSelect,patientsList).sex()]);
+			String sexSelect = (String)JOptionPane.showInputDialog(null, "Select the patient sex","Search sex"
+					,JOptionPane.QUESTION_MESSAGE,null,sexList,sexList[0]);
 			selectedpatient =  new Patient();
 			for (Patient p: patientsList) {
-				if (p.getCatagory().contains(catSelect) && p.getName().contains(nameSelect)&& p.getSize().contains(sizeSelect)) 
+				if (p.getSex().contains(catSelect) && p.getfirstName().contains(firstNameSelect)&& p.getSex().contains(sexSelect)) 
 					selectedpatient.makeCopy(p);
-			}
+			} 
+			*/
 			dispose();
 			new BookAppointment(selectedpatient);
 
-		}
+		} 
 	}
-}

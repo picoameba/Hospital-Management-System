@@ -27,6 +27,23 @@ public class Regex_Checker {
 		else
 			return false;
 	}
+	public static boolean fisrtName_Verifier(String name) {
+		Pattern pattern = Pattern.compile( "[A-Z][a-z]*" );//compiling the pattern, saves time in future
+	       Matcher matcher = pattern.matcher(mail);//Which string is to be checked
+		if(matcher.matches())//Actual comparison happens here
+			return true;
+		else
+			return false;
+	}
+	public static boolean lastName_Verifier(String name) {
+		Pattern pattern = Pattern.compile("[A-Z]+([ '-][a-zA-Z]+)*");//compiling the pattern, saves time in future
+	       Matcher matcher = pattern.matcher(mail);//Which string is to be checked
+		if(matcher.matches())//Actual comparison happens here
+			return true;
+		else
+			return false;
+	}
+	
 	public static void main(String[] args) {
 		String phone; //pat1="^(?:\\+971|00971|0)?(?:50|51|52|55|56|2|3|4|6|7|9)\\d{7}$";//Don't completely know how this regex string works but I can get it modified
 		Scanner c = new Scanner(System.in);

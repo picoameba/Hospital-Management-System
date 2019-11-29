@@ -1,5 +1,5 @@
 //class used by the admin to update the details of a patient 
-
+/*
 package project;
 
 import java.io.*;
@@ -26,7 +26,7 @@ class AddPatient extends UpdatePatient implements ActionListener{
 	//method that adds a patient to the file
 
 	public void printToFile(Object p) throws IOException{
-		PrintWriter fout =  new PrintWriter (new FileWriter("patients.txt", true));//appends to the file
+		PrintWriter fout =  new PrintWriter (new FileWriter("patient.txt", true));//appends to the file
 		fout.println(p);
 		fout.close();
 	}
@@ -35,7 +35,7 @@ class AddPatient extends UpdatePatient implements ActionListener{
 	//method that checks if a patient ID exists
 
 	public boolean checkID(int i) throws FileNotFoundException{
-		Scanner fin =  new Scanner (new FileReader("patients.txt"));
+		Scanner fin =  new Scanner (new FileReader("patient.txt"));
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
 			String name = cin.next();
@@ -71,3 +71,4 @@ class AddPatient extends UpdatePatient implements ActionListener{
 		}
 	}
 }
+*/
