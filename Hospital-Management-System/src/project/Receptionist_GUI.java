@@ -2,6 +2,14 @@ package project;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -190,6 +198,13 @@ public class Receptionist_GUI extends JFrame {
 		addPatientPanel.add(comboBox_2);
 		
 		JButton btnRegister = new JButton("Register");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if() {
+					
+				}
+			}
+		});
 		btnRegister.setBounds(186, 235, 91, 23);
 		addPatientPanel.add(btnRegister);
 		
