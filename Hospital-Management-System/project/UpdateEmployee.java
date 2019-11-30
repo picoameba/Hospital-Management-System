@@ -25,10 +25,10 @@ public class UpdateEmployee extends JFrame implements ActionListener, PrintToFil
 		super("Update employee"); //the title of the JFrame
 		setLayout(new GridLayout(4,2)); //set Layout to GridLayout with 9 rows and two columns
 
-		tname = new JTextField(c.getName());
+		tname = new JTextField(c.getFirstName());
 		tid = new JTextField(c.getId()+"");
 		tid.setEditable(false);
-		tpass = new JTextField(c.getPass());
+		tpass = new JTextField(c.getPassword());
 
 		// adding the JFrame elements
 		add(name);	add(tname);
@@ -57,7 +57,7 @@ public class UpdateEmployee extends JFrame implements ActionListener, PrintToFil
 			String name = cin.next();
 			int id =  cin.nextInt();
 			String password = cin.next();
-			employees.add(new Employee (name,id,password));
+			employees.add(new Employee (firstName, lastName, id,  email,  age,  username,  password,  ocupation,  speciality));
 			cin.close();
 		}
 		fin.close();
@@ -123,7 +123,7 @@ public class UpdateEmployee extends JFrame implements ActionListener, PrintToFil
 						JOptionPane.showMessageDialog(null, "Please provide the name and password" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
 					}
 					else {
-						Employee cash = new Employee(name,id,password);
+						Employee cash = new Employee(firstName, lastName, id,  email,  age,  username,  password,  ocupation,  speciality);
 						printToFile(cash);
 						JOptionPane.showMessageDialog(null, "employee List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
 						dispose();

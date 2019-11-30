@@ -29,6 +29,17 @@ public class Employee {
 		this.id=id;
 
 	}
+	public Employee() {
+		this.firstName = "";
+		this.lastName = "";
+		this.id = "";
+		this.email = "";
+		this.age = 0;
+		this.username = "";
+		this.password = "";
+		this.ocupation = null;
+		this.speciality = null;
+	}
 
 	public String getFirstName() {
 		return firstName;
