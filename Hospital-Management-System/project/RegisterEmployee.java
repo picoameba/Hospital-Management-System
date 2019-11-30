@@ -47,7 +47,7 @@ class RegisterEmployee extends JFrame implements ActionListener{
 			textAreas[0].append(name+"\n");
 			textAreas[1].append(id+"\n");
 			textAreas[2].append(pass+"\n");
-			employeesList.add(new Employee (name,id,pass));
+			employeesList.add(new Employee (firstName, lastName, id,  email,  age,  username,  password,  ocupation,  speciality));
 			cin.close();
 		}
 		fin.close();
@@ -129,10 +129,10 @@ class RegisterEmployee extends JFrame implements ActionListener{
 		else if (e.getSource() == updateemployee){ //update a employee
 			String s =  JOptionPane.showInputDialog(null, "Enter The employee ID", "Search employee by ID", JOptionPane.QUESTION_MESSAGE);
 			try {
-				int i = Integer.parseInt(s);
+				String i = s;
 				boolean check = false;
 				for (Employee employee: employeesList) {
-					if (employee.getId() == i) {
+					if (Employee.getId().equals(i)) {
 						dispose();
 						new UpdateEmployee(employee);
 						check = true;

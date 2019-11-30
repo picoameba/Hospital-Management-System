@@ -19,13 +19,13 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 	private JLabel id =  new JLabel("ID of The patient:");
 	private JLabel gender =  new JLabel("gender of The patient:");
 	private JLabel age =  new JLabel("age of The patient:");
-	private JLabel bloodtype =  new JLabel("bloodtype of The patient:");
+	private JLabel bloodType =  new JLabel("bloodtype of The patient:");
 	private JLabel mobile =  new JLabel("Mobile number of The patient:");
 	private JLabel telephone =  new JLabel("telephone number of The patient:");
 	private JLabel insuranceType =  new JLabel("insurance type of The patient:");
 	private JTextField tFName;
 	private JTextField tLName;
-	private JTextField tid;
+	protected JTextField tid;
 	private JTextField tGender;
 	private JTextField tAge;
 	private JTextField tBloodType;
@@ -39,24 +39,24 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 	public UpdatePatient(Patient p) {
 		super("Update patient"); //the title of the JFrame
 		setLayout(new GridLayout(9,2)); //set Layout to GridLayout with 9 rows and two columns
-		tname = new JTextField(p.getFirstName());
+		tFName = new JTextField(p.getFirstName());
 		tid = new JTextField(p.getId()+"");
 		tid.setEditable(false);
 		tAge = new JTextField(p.getAge());
 		tGender = new JTextField(p.getGender());
-		tbloodType = new JTextField(p.getbloodType());
-		tMobile = new JTextField(p.getMobilecription());
-		tprice = new JTextField(p.getPrice()+"");
-		tInsurance = new JTextField(p.getInsuranceity()+"");
+		tBloodType = new JTextField(p.getBloodType());
+		tMobile = new JTextField(p.getMobileNumber());
+		tTelephone = new JTextField(p.getTelephone()+"");
+		tInsurance = new JTextField(p.getInsuranceType()+"");
 		// adding the JFrame elements
-		add(name);	add(tname);
+		add(tFName);	add(fName);
 		add(id);	add(tid);
-		add(Gender);	add(tGender);
-		add(Age);	add(tAge);
-		add(price);	add(tprice);
-		add(bloodType);	add(tbloodType);
-		add(Insurance);	add(tInsurance);
-		add(Mobile);	add(tMobile);
+		add(gender);	add(tGender);
+		add(age);	add(tAge);
+		add(telephone);	add(tTelephone);
+		add(bloodType);	add(tBloodType);
+		add(insuranceType);	add(tInsurance);
+		add(mobile);	add(tMobile);
 		add(cancel);add(update);
 		//add the ActionListener the the Buttons
 
@@ -82,14 +82,14 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 			int id =  cin.nextInt();
 			String Genderagory = cin.next();
 			String Age = cin.next();
-			double price = cin.nextDouble();
+			double Telephone = cin.nextDouble();
 			String bloodTypeture = cin.next();
 			int Insurance = cin.nextInt();
 			if (cin.hasNext()) 
 				Mobilecription = cin.nextLine();
 			else
 				Mobilecription = "";
-			patients.add(new Patient (name,id,Genderagory,Age,price,bloodTypeture,Insurance,Mobilecription));
+			patients.add(new Patient (ID, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height));
 			cin.close();
 		}
 		fin.close();
@@ -109,9 +109,9 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cancel) { //actions for the cancel Button
 			try {
-				Mobilepose();
+				Mobile();
 				new CheckPatient();
-			} Genderch (FileNotFoundException e1) {
+			} Gender (FileNotFoundException e1) {
 				e1.printStackTrace();
 				JOptionPane.showMessageDialog(null, "patient File Not Found" , "404" , JOptionPane.ERROR_MESSAGE);
 			}
@@ -119,25 +119,25 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 		}
 		else if (e.getSource() == update){ //action for the update Button
 			try {
-				String name = tname.getText();
+				String name = tFName.getText();
 				int id =  Integer.parseInt(tid.getText());
 				String Genderagory = tGender.getText();
 				String Age = tAge.getText();
-				double price = Double.parseDouble(tprice.getText());
-				String bloodTypeture = tbloodType.getText();
+				double Telephone = Double.parseDouble(tTelephone.getText());
+				String bloodTypeture = tBloodType.getText();
 				int Insurance = Integer.parseInt(tInsurance.getText());
 				String Mobilec =  tMobile.getText();
-				if (price <=  0||Insurance <=  0){ //check if the Insuranceity or the prive is negative or positive
-					JOptionPane.showMessageDialog(null, "Please enter Positive Insuranceity and Price" , "Invaild Price or Insuranceity" , JOptionPane.ERROR_MESSAGE);
+				if (Telephone <=  0||Insurance <=  0){ //check if the Insuranceity or the prive is negative or positive
+					JOptionPane.showMessageDialog(null, "Please enter Positive Insuranceity and Telephone" , "Invaild Telephone or Insuranceity" , JOptionPane.ERROR_MESSAGE);
 				}
 				else if (name.equals("") || Genderagory.equals("")|| Age.equals("")|| bloodTypeture.equals("")){ //check if one of the fields are empty (name,Genderagory,Age and bloodTypeture)
 					JOptionPane.showMessageDialog(null, "Please fill Name,Genderagory,Age and bloodTypeture" , "Unsuccessfull!!" , JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					Patient pro = new Patient(name,id,Genderagory,Age,price,bloodTypeture,Insurance,Mobilec);
+					Patient pro = new Patient(ID, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height);
 					printToFile(pro);
 					JOptionPane.showMessageDialog(null, "patient List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
-					Mobilepose();
+					Mobile();
 					new CheckPatient();
 				}
 			}

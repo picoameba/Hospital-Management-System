@@ -4,7 +4,11 @@ import java.util.*;
 
 public class Employee {
 
-	private String firstName, lastName, id, email, username, password;
+	private String firstName, lastName;
+	private static String id;
+	private String email;
+	private String username;
+	private String password;
 	private int age;
 	private EmployeeType ocupation;
 	private Speciality speciality;
@@ -89,7 +93,7 @@ public class Employee {
 		this.speciality = speciality;
 	}
 
-	public String getId() {
+	public static String getId() {
 		return id;
 	}
 
