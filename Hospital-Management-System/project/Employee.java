@@ -93,7 +93,7 @@ public class Employee {
 		this.speciality = speciality;
 	}
 
-	public static String getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -115,7 +115,7 @@ public class Employee {
 
 	public void Save_Employee(Vector<Employee> save) {
 		try {
-			PrintWriter S = new PrintWriter("Employee.txt");
+			PrintWriter S = new PrintWriter("employee.txt");
 			for(int i = 0;i<save.size();i++) {
 				S.println(save.elementAt(i).getFirstName()+" "+save.elementAt(i).getLastName()+" "+save.elementAt(i).getId()+" "+save.elementAt(i).getEmail()+" "+save.elementAt(i).getAge()+" "+save.elementAt(i).getUsername()+" "+save.elementAt(i).getPassword()+" "+save.elementAt(i).getOcupation()+" "+save.elementAt(i).getSpeciality());
 				//System.out.println(save.elementAt(i).getFirstName()+" "+save.elementAt(i).getLastName()+" "+save.elementAt(i).getId()+" "+save.elementAt(i).getEmail()+" "+save.elementAt(i).getAge()+" "+save.elementAt(i).getUsername()+" "+save.elementAt(i).getPassword()+" "+save.elementAt(i).getOcupation()+" "+save.elementAt(i).getSpeciality());
@@ -130,7 +130,7 @@ public class Employee {
 	public Vector<Employee> Load_Employee() {
 		Vector<Employee> load = new Vector<Employee>();
 		try {
-			Scanner L = new Scanner(new FileReader("Employee.txt"));
+			Scanner L = new Scanner(new FileReader("employee.txt"));
 			while (L.hasNext()) {
 				load.add(new Employee(L.next(), L.next(), L.next(), L.next(), L.nextInt(), L.next(), L.next(), ocupation.valueOf(L.next()), speciality.valueOf(L.next())));
 			}

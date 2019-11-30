@@ -44,7 +44,7 @@ public class Authenticate {
 						//creates active account from text file data
 					}
 					else {
-						activeAccount = new Admin(user, id, pass);
+						activeAccount = (Admin) new Employee(user, id, pass);
 						//creates active account from text file data
 					}
 					new Options(true);
