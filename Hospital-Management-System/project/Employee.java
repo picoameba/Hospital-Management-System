@@ -1,16 +1,17 @@
+package project;
 import java.io.*;
 import java.util.*;
 
-public class Employees {
+public class Employee {
 
 	private String firstName, lastName, id, email, username, password;
 	private int age;
 	private EmployeeType ocupation;
 	private Speciality speciality;
-	
-	
 
-	public Employees(String firstName, String lastName, String id, String email, int age, String username, String password, EmployeeType ocupation, Speciality speciality) {
+
+
+	public Employee(String firstName, String lastName, String id, String email, int age, String username, String password, EmployeeType ocupation, Speciality speciality) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.id = id;
@@ -20,6 +21,13 @@ public class Employees {
 		this.password = password;
 		this.ocupation = ocupation;
 		this.speciality = speciality;
+	}
+	public Employee(String username, String id, String password) {
+
+		this.username = username;
+		this.password = password;
+		this.id=id;
+
 	}
 
 	public String getFirstName() {
@@ -73,7 +81,7 @@ public class Employees {
 	public String getId() {
 		return id;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -89,8 +97,8 @@ public class Employees {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	public void Save_Employees(Vector<Employees> save) {
+
+	public void Save_Employee(Vector<Employee> save) {
 		try {
 			PrintWriter S = new PrintWriter("Employee.txt");
 			for(int i = 0;i<save.size();i++) {
@@ -101,22 +109,22 @@ public class Employees {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	    
+
 
 	}
-	public Vector<Employees> Load_Employees() {
-		Vector<Employees> load = new Vector<Employees>();
+	public Vector<Employee> Load_Employee() {
+		Vector<Employee> load = new Vector<Employee>();
 		try {
 			Scanner L = new Scanner(new FileReader("Employee.txt"));
 			while (L.hasNext()) {
-				load.add(new Employees(L.next(), L.next(), L.next(), L.next(), L.nextInt(), L.next(), L.next(), ocupation.valueOf(L.next()), speciality.valueOf(L.next())));
+				load.add(new Employee(L.next(), L.next(), L.next(), L.next(), L.nextInt(), L.next(), L.next(), ocupation.valueOf(L.next()), speciality.valueOf(L.next())));
 			}
 			L.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	    
+
 		return load;
 	}
-	
+
 }

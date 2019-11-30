@@ -3,7 +3,7 @@ package project;
 public class Admin {
 
 	private String name;
-	private int id;
+	private String id;
 	private String pass;
 	
 	//**********************************************************************************************
@@ -12,7 +12,7 @@ public class Admin {
 		return name;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -23,7 +23,7 @@ public class Admin {
 	//**********************************************************************************************
 	//full constructor
 	
-	public Admin(String name, int id, String pass) {
+	public Admin(String name, String id, String pass) {
 		this.name = name;
 		this.id = id;
 		this.pass = pass;

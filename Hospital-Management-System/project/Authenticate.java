@@ -7,12 +7,13 @@ import javax.swing.*;
 public class Authenticate {
 
 	private static Admin activeAccount;
-
+	
 	//***************************************************************
 	//getter method
 	public static Admin getActiveAccount() {
 		return activeAccount;
 	}
+	
 
 	//***************************************************************
 	//checks if entered credentials are valid
@@ -35,7 +36,7 @@ public class Authenticate {
 		while(!isFound && fin.hasNext()) {
 			if (user.equals(fin.next())) {
 				isFound = true;	//user is found
-				int id = fin.nextInt();
+				String id = fin.next();
 
 				if (pass.equals(fin.next())) {
 					if (access == "Admin") {
@@ -43,7 +44,7 @@ public class Authenticate {
 						//creates active account from text file data
 					}
 					else {
-						activeAccount = new Employee(user, id, pass);
+						activeAccount = new Admin(user, id, pass);
 						//creates active account from text file data
 					}
 					new Options(true);

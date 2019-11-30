@@ -1,13 +1,12 @@
 //class used by the admin to update the details of a patient 
-/*
+
 package project;
 
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
-import project.Patient;
-import project.UpdatePatient;
+
 
 import java.awt.event.*;
 
@@ -71,4 +70,4 @@ class AddPatient extends UpdatePatient implements ActionListener{
 		}
 	}
 }
-*/
+

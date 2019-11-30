@@ -1,3 +1,4 @@
+package project;
 public enum Speciality {
 	//Fake Specialities
 	NA,

@@ -18,8 +18,8 @@ class AddEmployee extends UpdateEmployee {
 		setTitle("Add employee");
 		update.setText("Add");
 		int lastemployee = employees.size() - 1;
-		int newId = employees.get(lastemployee).getId() + 1;
-		tid.setText(Integer.toString(newId));
+	//	int newId = Employee.get(lastemployee).getId() + 1;
+//		tid.setText(Integer.toString(newId));
 	}
 
 	//**********************************************************************************************

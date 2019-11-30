@@ -35,6 +35,21 @@ public Patient(String id, String firstName, String lastName, String email, Strin
 	this.weight = weight;
 	this.height = height;
 }
+public Patient() {
+	super();
+	this.id = "";
+	this.firstName = "";
+	this.lastName = "";
+	this.email = "";
+	this.gender = "";
+	this.bloodType = "";
+	this.mobileNumber = "";
+	this.telephone = "";
+	this.insuranceType = "";
+	this.age = 0;
+	this.weight = 0.0;
+	this.height = 0.0;
+}
 //Setters and getters
 public String getFirstName() {
 	return firstName;
