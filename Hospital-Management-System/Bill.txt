@@ -1,0 +1,11 @@
+Purchased patients:
+
+Total Amount: 
+VAT:  
+Total Amount with the VAT:  
+
+Bill Date and Time: 2019/12/01 10:13:44
+
+employee Name: ahmad
+
+Thank You
