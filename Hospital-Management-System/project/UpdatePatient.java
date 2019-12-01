@@ -74,7 +74,7 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 	public void printToFile(Object p) throws IOException{
 		Scanner fin =  new Scanner (new FileReader("patient.txt"));
 		ArrayList<Patient> patients = new ArrayList<>();
-		String Mobilecription;
+		int mobile;
 		
 		while (fin.hasNextLine()) {
 			Scanner cin = new Scanner(fin.nextLine());
@@ -86,9 +86,9 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 			String bloodTypeture = cin.next();
 			int Insurance = cin.nextInt();
 			if (cin.hasNext()) 
-				Mobilecription = cin.nextLine();
+				mobile = cin.nextInt();
 			else
-				Mobilecription = "";
+				mobile = 0;
 			patients.add(new Patient (ID, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height));
 			cin.close();
 		}
@@ -109,7 +109,7 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cancel) { //actions for the cancel Button
 			try {
-				Mobile();
+				mobileNumber();
 				new CheckPatient();
 			} Gender (FileNotFoundException e1) {
 				e1.printStackTrace();
@@ -137,7 +137,7 @@ class UpdatePatient extends JFrame implements ActionListener, PrintToFile{
 					Patient pro = new Patient(ID, firstName, lastName, email, gender, bloodType, mobileNumber, telephone, insuranceType, age, weight, height);
 					printToFile(pro);
 					JOptionPane.showMessageDialog(null, "patient List Updated" , "Successfull!!" , JOptionPane.INFORMATION_MESSAGE);
-					Mobile();
+					mobileNumber();
 					new CheckPatient();
 				}
 			}

@@ -13,7 +13,7 @@ public class Authenticate {
 	public static Admin getActiveAccount() {
 		return activeAccount;
 	}
-	
+
 
 	//***************************************************************
 	//checks if entered credentials are valid
@@ -44,9 +44,9 @@ public class Authenticate {
 						//creates active account from text file data
 					}
 					else {
-						activeAccount = (Admin) new Employee(user, id, pass);
+						activeAccount =  new EmployeeLogin(user, id, pass);
 						//creates active account from text file data
-					}
+					} 
 					new Options(true);
 				}
 				else {

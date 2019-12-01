@@ -53,7 +53,7 @@ class Options extends JFrame implements ActionListener {
 			info.setText("Welcome " + activeAccount.getName() + "!\n");
 			buttons[0].setEnabled(false);
 			buttons[0].setBackground(Color.LIGHT_GRAY);
-			if(activeAccount instanceof Employee) {
+			if(activeAccount instanceof EmployeeLogin) {
 				buttons[2].setEnabled(false);
 				buttons[3].setEnabled(false);
 				buttons[2].setBackground(Color.LIGHT_GRAY);

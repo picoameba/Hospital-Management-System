@@ -18,6 +18,7 @@ class Options extends JFrame implements ActionListener {
 	//initializes variables needed for the frame
 
 	private Admin activeAccount;
+	
 	//declares variables needed for the actions
 
 	//**********************************************************************************************
@@ -27,7 +28,8 @@ class Options extends JFrame implements ActionListener {
 		super("Hospital Management System");
 
 		activeAccount = Authenticate.getActiveAccount(); //sets the active account as it is in the Authenticate
-
+		
+		
 		operations.setLayout(new GridLayout(3, 2));//
 		setLayout(new GridLayout(2, 1));//
 		setSize(600, 450);
@@ -53,7 +55,7 @@ class Options extends JFrame implements ActionListener {
 			info.setText("Welcome " + activeAccount.getName() + "!\n");
 			buttons[0].setEnabled(false);
 			buttons[0].setBackground(Color.LIGHT_GRAY);
-			if(activeAccount instanceof Employee) {
+			if(!(activeAccount instanceof Admin)) {
 				buttons[2].setEnabled(false);
 				buttons[3].setEnabled(false);
 				buttons[2].setBackground(Color.LIGHT_GRAY);

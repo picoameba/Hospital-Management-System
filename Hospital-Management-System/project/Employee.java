@@ -93,7 +93,7 @@ public class Employee {
 		this.speciality = speciality;
 	}
 
-	public String getId() {
+	public static String getId() {
 		return id;
 	}
 

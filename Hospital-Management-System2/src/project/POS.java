@@ -43,7 +43,7 @@ public class POS {
 						//creates active account from text file data
 					}
 					else {
-						activeAccount = new Employee(user, id, pass);
+						activeAccount = new EmployeeLogin(user, id, pass);
 						//creates active account from text file data
 					}
 					new Options(true);

@@ -1,15 +1,15 @@
 package project;
 
-public class Employee extends Admin {
+public class EmployeeLogin extends Admin {
 	
 	//constructor
-	public Employee() {
-		super("", 0, "");
+	public EmployeeLogin() {
+		super("", "", "");
 	}
 	
 	//**********************************************************************************************
 	//full constructor
-	public Employee(String user, int id, String pass) {
+	public EmployeeLogin(String user, String id, String pass) {
 		super(user, id, pass);
 	}
 
